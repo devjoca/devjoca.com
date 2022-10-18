@@ -1,9 +1,6 @@
 {
   // Configuration for JavaScript files
-  "extends": [
-    "airbnb-base",
-    "plugin:prettier/recommended"
-  ],
+  "extends": ["airbnb-base", "plugin:prettier/recommended"],
   "rules": {
     "prettier/prettier": [
       "error",
@@ -16,16 +13,12 @@
   "overrides": [
     // Configuration for mjs files
     {
-      "files": [
-        "**/*.mjs"
-      ],
+      "files": ["**/*.mjs"],
       "parserOptions": {
         "sourceType": "module",
         "ecmaVersion": 2015
       },
-      "extends": [
-        "plugin:prettier/recommended"
-      ],
+      "extends": ["plugin:prettier/recommended"],
       "rules": {
         "prettier/prettier": [
           "error",
@@ -40,10 +33,7 @@
     },
     // Configuration for TypeScript files
     {
-      "files": [
-        "**/*.ts",
-        "**/*.tsx"
-      ],
+      "files": ["**/*.ts", "**/*.tsx"],
       "plugins": [
         "@typescript-eslint",
         "react",
@@ -104,9 +94,7 @@
     },
     // Configuration for Astro
     {
-      "files": [
-        "**/*.astro"
-      ],
+      "files": ["**/*.astro"],
       "plugins": [
         "@typescript-eslint",
         "react",
@@ -124,9 +112,7 @@
       "parserOptions": {
         "parser": "@typescript-eslint/parser",
         "project": "./tsconfig.json",
-        "extraFileExtensions": [
-          ".astro"
-        ]
+        "extraFileExtensions": [".astro"]
       },
       "rules": {
         "prettier/prettier": [
@@ -150,17 +136,13 @@
         "import/no-unresolved": [
           "error",
           {
-            "ignore": [
-              "@/*"
-            ]
+            "ignore": ["@/*"]
           }
         ], // Disable no-unresolved rule for .astro files
         "react/jsx-filename-extension": [
           1,
           {
-            "extensions": [
-              ".astro"
-            ]
+            "extensions": [".astro"]
           }
         ], // Accept jsx in astro files
         "react/destructuring-assignment": "off", // Vscode doesn't support automatically destructuring, it's a pain to add a new variable

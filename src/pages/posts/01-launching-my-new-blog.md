@@ -1,12 +1,11 @@
 ---
-layout: '@/templates/BasePost.astro'
+layout: "@/templates/BasePost.astro"
 title: "Launching my new blog"
 description: "Launching my new blog"
 pubDate: 2021-05-09T00:00:00Z
-imgSrc: '../../images/launch.jpg'
-imgAlt: 'Launching'
+imgSrc: "../../images/launch.jpg"
+imgAlt: "Launching"
 ---
-
 
 Since the last year I was trying to put some effort on a side project in order to learn some amazing new technologies or just for fun.
 There are a lot of complicated things about side projects, but for me was to actually start something so I choose building my personal blog to fill that purpose.

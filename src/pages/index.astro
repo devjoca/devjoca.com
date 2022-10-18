@@ -1,10 +1,9 @@
 ---
-import { Hero } from '@/partials/Hero';
-import Base from '@/templates/Base.astro';
-import { AppConfig } from '@/utils/AppConfig';
-import { sortByDate } from '@/utils/Posts';
+import Base from "@/templates/Base.astro";
+import { AppConfig } from "@/utils/AppConfig";
+import { sortByDate } from "@/utils/Posts";
 
-const allPosts = await Astro.glob('./posts/*.{md,mdx}');
+const allPosts = await Astro.glob("./posts/*.{md,mdx}");
 const sortedPosts = sortByDate(allPosts);
 // const lastThreePosts = sortedPosts.slice(0, 3);
 
@@ -13,5 +12,4 @@ const { description } = AppConfig;
 ---
 
 <Base head={{ title, description }}>
-  <Hero />
 </Base>
