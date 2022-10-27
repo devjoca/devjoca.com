@@ -2,9 +2,11 @@
 import Base from '@/templates/Base.astro';
 import { AppConfig } from '@/utils/AppConfig';
 import { sortByDate } from '@/utils/Posts';
-import type { IFrontmatter } from '@/utils/types';
+import type { IFrontmatter, MarkdownInstance } from '@/utils/types';
 
-const allPosts = await Astro.glob<IFrontmatter>('./posts/*.{md,mdx}');
+const allPosts: MarkdownInstance<IFrontmatter>[] = await Astro.glob(
+  './posts/*.{md,mdx}'
+);
 const sortedPosts = sortByDate(allPosts);
 
 const { title } = AppConfig;
