@@ -1,23 +1,25 @@
 ---
-import type { IFrontmatter } from 'astro-boilerplate-components';
-
-import { CTA } from '@/partials/CTA';
-import { Hero } from '@/partials/Hero';
-import { ProjectList } from '@/partials/ProjectList';
-import { RecentPosts } from '@/partials/RecentPosts';
 import Base from '@/templates/Base.astro';
 import { AppConfig } from '@/utils/AppConfig';
 import { sortByDate } from '@/utils/Posts';
+import type { IFrontmatter, MarkdownInstance } from '@/utils/types';
 
-const allPosts = await Astro.glob<IFrontmatter>('./posts/*.md');
+const allPosts: MarkdownInstance<IFrontmatter>[] = await Astro.glob(
+  './posts/*.{md,mdx}'
+);
 const sortedPosts = sortByDate(allPosts);
-const lastThreePosts = sortedPosts.slice(0, 3);
 
 const { title } = AppConfig;
 const { description } = AppConfig;
 ---
 
 <Base head={{ title, description }}>
-  <Hero />
-  <RecentPosts postList={lastThreePosts} />
+  {
+    sortedPosts.map((post) => (
+      <article>
+        <h2>{post.frontmatter.title}</h2>
+        <span>{post.frontmatter.description}</span>
+      </article>
+    ))
+  }
 </Base>

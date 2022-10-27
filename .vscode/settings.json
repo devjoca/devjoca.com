@@ -20,9 +20,7 @@
   "jest.autoRun": {
     "watch": true, // Start the jest with the watch flag
     "onSave": "test-src-file", // Trigger test run for the given test or source file upon save
-    "onStartup": [
-      "all-tests"
-    ] // Run all tests upon project launch
+    "onStartup": ["all-tests"] // Run all tests upon project launch
   },
   "jest.showCoverageOnLoad": true, // Show code coverage when the project is launched
   // Multiple language settings for json and jsonc files
@@ -36,5 +34,8 @@
     "frontmatter",
     "imagetools",
     "tailwindcss"
-  ]
+  ],
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
