@@ -1,15 +1,23 @@
 ---
-import Base from "@/templates/Base.astro";
-import { AppConfig } from "@/utils/AppConfig";
-import { sortByDate } from "@/utils/Posts";
+import Base from '@/templates/Base.astro';
+import { AppConfig } from '@/utils/AppConfig';
+import { sortByDate } from '@/utils/Posts';
+import type { IFrontmatter } from '@/utils/types';
 
-const allPosts = await Astro.glob("./posts/*.{md,mdx}");
+const allPosts = await Astro.glob<IFrontmatter>('./posts/*.{md,mdx}');
 const sortedPosts = sortByDate(allPosts);
-// const lastThreePosts = sortedPosts.slice(0, 3);
 
 const { title } = AppConfig;
 const { description } = AppConfig;
 ---
 
 <Base head={{ title, description }}>
+  {
+    sortedPosts.map((post) => (
+      <article>
+        <h2>{post.frontmatter.title}</h2>
+        <span>{post.frontmatter.description}</span>
+      </article>
+    ))
+  }
 </Base>

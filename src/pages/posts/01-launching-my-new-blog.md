@@ -1,7 +1,7 @@
 ---
 layout: "@/templates/BasePost.astro"
 title: "Launching my new blog"
-description: "Launching my new blog"
+description: "My first adventure building my own blog by myself"
 pubDate: 2021-05-09T00:00:00Z
 imgSrc: "../../images/launch.jpg"
 imgAlt: "Launching"
