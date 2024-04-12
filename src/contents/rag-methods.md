@@ -46,7 +46,7 @@ Basically in this approach, we ask the LLM to rewrite the user query, it will ge
 
 Pass a bigger number of documents to the Reranker, which is an LLM that takes the query and the documents and returns a relevance score to filter out documents
 
-### Parent Document retrieval
+## Parent Document retrieval
 
 ![Parent document retrieval](https://raw.githubusercontent.com/devjoca/devjoca.com/main/src/images/rag-parent-chunk.jpg)
 
