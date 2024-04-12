@@ -4,12 +4,11 @@ datetime: 2023-01-12T15:22:00Z
 title: My first blog
 slug: my-first-blog
 featured: true
-tags: 
-    - post
+tags:
+  - post
 draft: false
 ogImage: ""
-description:
-  A short story about this blog
+description: A short story about this blog
 ---
 
 Since the last year I was trying to put some effort on a side project in order to learn some amazing new technologies or just for fun.

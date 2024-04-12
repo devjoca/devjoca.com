@@ -41,5 +41,5 @@ export const SOCIALS: SocialObjects = [
     href: "https://twitter.com/devjoca",
     linkTitle: `${SITE.title} on Twitter`,
     active: false,
-  }
+  },
 ];
