@@ -13,7 +13,7 @@ ogImage: ""
 description: Explore advanced retrieval strategies that enhance the integration of vector databases with large language models (LLMs). This detailed guide delves into the challenges and solutions associated with document retrieval, including techniques like similarity search, contextual compression, query rewriting, reranking, and parent document retrieval. Learn how to optimize document processing for better accuracy and relevance in AI-driven systems. Discover practical solutions for handling large document chunks, improving context relevance, and ensuring that only the most pertinent documents are fed into LLMs. Perfect for developers and technologists seeking to refine their retrieval systems using the latest advancements in AI and database management.
 ---
 
-In this article, we explore effective strategies for integrating vector databases with large language models (LLMs). We discuss the challenges of document retrieval and present solutions that improve accuracy and relevance. Learn about the latest techniques in similarity search, contextual compression, and more, to enhance how your systems process and retrieve documents for relevant answers. This guide is ideal for developers and technologists looking to update their AI applications.
+In this article, we explore effective strategies for integrating vector databases with large language models (LLMs). Learn about the latest techniques in similarity search, contextual compression, and more, to enhance how your systems process and retrieve documents for relevant answers. This small guide is ideal for developers and technologists looking to update their AI applications.
 
 ## Vector Search
 
@@ -23,9 +23,9 @@ This is the nave approach where we use a method called similarity search to retr
 
 ### Issues
 
-* Large doc chunks reduce the quality of the retrieval process
-* Limited context relevance
-* Bad retrievals or return irrelevant chunks
+- Large doc chunks reduce the quality of the retrieval process
+- Limited context relevance
+- Bad retrievals or return irrelevant chunks
 
 ## Contextual Compression
 
@@ -54,7 +54,7 @@ Fix the issue when your query is in the middle of 2 chunks of documents stored i
 
 Reference:
 
-* [RAGOps: Advanced Retrieval Strategies with LangChain, Langsmith and Supabase.](https://www.youtube.com/watch?v=EuHderGVUs8)
-* [Query Rewriting for Retrieval-Augmented Large Language Models](ERReadad)
-* [Cohere Rerank](https://cohere.com/rerank)
-* [Parent Document Retriever](https://python.langchain.com/docs/modules/data_connection/retrievers/parent_document_retriever/)
+- [RAGOps: Advanced Retrieval Strategies with LangChain, Langsmith and Supabase.](https://www.youtube.com/watch?v=EuHderGVUs8)
+- [Query Rewriting for Retrieval-Augmented Large Language Models](ERReadad)
+- [Cohere Rerank](https://cohere.com/rerank)
+- [Parent Document Retriever](https://python.langchain.com/docs/modules/data_connection/retrievers/parent_document_retriever/)
