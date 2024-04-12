@@ -17,7 +17,7 @@ In this article, we explore effective strategies for integrating vector database
 
 ## Vector Search
 
-![Vector Search](../images/rag-vector.jpg)
+![Vector Search](https://raw.githubusercontent.com/devjoca/devjoca.com/main/src/images/rag-vector.jpg)
 
 This is the nave approach where we use a method called similarity search to retrieve documents from a vector database. Once we have obtained the documents, we feed them into a large language model (LLM) to produce results
 
@@ -36,19 +36,19 @@ We use a vector database to find documents, and before giving them to the large 
 
 ## Rewrite, Retrieve and Read
 
-![RRR](../images/rag-rrr.jpg)
+![RRR](https://raw.githubusercontent.com/devjoca/devjoca.com/main/src/images/rag-rrr.jpg)
 
 Basically in this approach, we ask the LLM to rewrite the user query, it will generate better results since the LLM is so good at understanding purposes and meanings
 
 ## Retrieval with Reranking
 
-![Reranker](../images/rag-reranker.jpg)
+![Reranker](https://raw.githubusercontent.com/devjoca/devjoca.com/main/src/images/rag-reranker.jpg)
 
 Pass a bigger number of documents to the Reranker, which is an LLM that takes the query and the documents and returns a relevance score to filter out documents
 
 ### Parent Document retrieval
 
-![Parent document retrieval](../images/rag-parent-chunk.jpg)
+![Parent document retrieval](https://raw.githubusercontent.com/devjoca/devjoca.com/main/src/images/rag-parent-chunk.jpg)
 
 Fix the issue when your query is in the middle of 2 chunks of documents stored in the vector db. In this case, we combine multiple contiguous chunks related to the most relevant chunk to give the LLM full context to answer the query, it will depend on how we are splitting our chunks.
 
