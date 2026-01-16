@@ -11,7 +11,9 @@ import type { Frontmatter } from "src/types";
 import Socials from "@components/Socials.astro";
 import { SOCIALS } from "@config";
 
-const posts = await Astro.glob<Frontmatter>("../contents/**/*.md");
+const posts = Object.values(
+  import.meta.glob<Frontmatter>("../contents/**/*.md", { eager: true })
+);
 
 const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(
