@@ -1,5 +1,5 @@
 import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
@@ -17,11 +17,6 @@ export default defineConfig({
     },
   },
   integrations: [
-    tailwind({
-      config: {
-        applyBaseStyles: false,
-      },
-    }),
     react(),
     sitemap(),
     compress(), // Compression must be last
@@ -30,6 +25,7 @@ export default defineConfig({
     inlineStylesheets: "auto", // Inline small CSS
   },
   vite: {
+    plugins: [tailwindcss()],
     build: {
       rollupOptions: {
         output: {

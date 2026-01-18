@@ -1,6 +1,71 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  --color-text-base: rgb(var(--color-text-base));
+  --color-accent: rgb(var(--color-accent));
+  --color-fill: rgb(var(--color-fill));
+  --color-card: rgb(var(--color-card));
+  --color-card-muted: rgb(var(--color-card-muted));
+  --color-border: rgb(var(--color-border));
+
+  --font-mono: "IBM Plex Mono", "monospace";
+}
+
+@utility text-skin-base {
+  color: rgb(var(--color-text-base));
+}
+@utility text-skin-accent {
+  color: rgb(var(--color-accent));
+}
+@utility text-skin-inverted {
+  color: rgb(var(--color-fill));
+}
+
+@utility bg-skin-fill {
+  background-color: rgb(var(--color-fill));
+}
+@utility bg-skin-accent {
+  background-color: rgb(var(--color-accent));
+}
+@utility bg-skin-inverted {
+  background-color: rgb(var(--color-text-base));
+}
+@utility bg-skin-card {
+  background-color: rgb(var(--color-card));
+}
+@utility bg-skin-card-muted {
+  background-color: rgb(var(--color-card-muted));
+}
+
+@utility outline-skin-fill {
+  outline-color: rgb(var(--color-fill));
+}
+@utility outline-skin-accent {
+  outline-color: rgb(var(--color-accent));
+}
+
+@utility border-skin-line {
+  border-color: rgb(var(--color-border));
+}
+@utility border-skin-fill {
+  border-color: rgb(var(--color-text-base));
+}
+@utility border-skin-accent {
+  border-color: rgb(var(--color-accent));
+}
+
+@utility fill-skin-base {
+  fill: rgb(var(--color-text-base));
+}
+@utility fill-skin-accent {
+  fill: rgb(var(--color-accent));
+}
 
 @layer base {
   :root,
@@ -30,7 +95,7 @@
   }
   body {
     @apply font-mono bg-skin-fill text-skin-base min-h-screen flex flex-col 
-    selection:bg-skin-accent selection:text-skin-inverted selection:bg-opacity-70;
+    selection:bg-[rgb(var(--color-accent))]/70 selection:text-[rgb(var(--color-fill))];
   }
   section,
   footer {
@@ -49,28 +114,81 @@
     group-hover:fill-transparent;
   }
   .prose {
-    @apply prose-a:underline-offset-8 prose-ul:overflow-x-clip 
-    prose-a:!decoration-dashed hover:prose-a:text-skin-accent 
-     prose-img:mx-auto prose-img:border-2 prose-img:border-skin-line
-     prose-img:!mt-2 prose-headings:!mb-3
-    prose-th:border prose-th:border-skin-line
-    prose-td:border prose-td:border-skin-line
-    prose-h3:italic
-
-    
-    prose-p:!text-skin-base prose-headings:!text-skin-base 
-    prose-ol:!text-skin-base prose-ul:!text-skin-base prose-blockquote:opacity-80 
-    prose-figcaption:!text-skin-base prose-figcaption:opacity-70
-    prose-code:bg-skin-card prose-code:bg-opacity-75 
-    prose-code:!text-skin-base prose-code:p-1 prose-code:rounded
-    prose-code:after:!content-[''] prose-code:before:!content-['']
-    prose-strong:!text-skin-base prose-table:text-skin-base 
-    prose-pre:!text-skin-base prose-a:!text-skin-base 
-    prose-hr:!border-skin-line prose-li:marker:!text-skin-accent 
-    prose-blockquote:!border-l-skin-accent prose-blockquote:border-opacity-50;
+    /* Basic prose styles using CSS instead of Tailwind variants */
+  }
+  .prose ul {
+    overflow-x: clip;
+  }
+  .prose img {
+    margin: 0 auto;
+    border: 2px solid rgb(var(--color-border));
+    margin-top: 0.5rem;
+  }
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    margin-bottom: 0.75rem;
+  }
+  .prose th,
+  .prose td {
+    border: 1px solid rgb(var(--color-border));
+  }
+  .prose h3 {
+    font-style: italic;
+  }
+  .prose p,
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6,
+  .prose ol,
+  .prose ul {
+    color: rgb(var(--color-text-base));
+  }
+  .prose figcaption {
+    color: rgb(var(--color-text-base));
+    opacity: 0.7;
+  }
+  .prose code {
+    background-color: rgb(var(--color-card) / 0.75);
+    color: rgb(var(--color-text-base));
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+  }
+  .prose code::after,
+  .prose code::before {
+    content: "";
+  }
+  .prose strong,
+  .prose table {
+    color: rgb(var(--color-text-base));
+  }
+  .prose pre {
+    color: rgb(var(--color-text-base));
+  }
+  .prose hr {
+    border-color: rgb(var(--color-border));
+  }
+  .prose li::marker {
+    color: rgb(var(--color-accent));
+  }
+  .prose blockquote {
+    border-left-color: rgb(var(--color-accent) / 0.5);
+    border-left-width: 4px;
+    opacity: 0.8;
   }
   .prose a {
-    @apply hover:!text-skin-accent;
+    color: rgb(var(--color-text-base));
+    text-decoration-style: dashed;
+    text-underline-offset: 8px;
+  }
+  .prose a:hover {
+    @apply hover:text-[rgb(var(--color-accent))];
   }
   .prose thead th:first-child,
   tbody td:first-child,
@@ -84,7 +202,9 @@
     @apply text-skin-base cursor-pointer inline-block select-none;
   }
   .prose summary {
-    @apply focus-outline;
+    outline-offset: 1px;
+    outline: 2px solid rgb(var(--color-fill));
+    outline-style: dashed;
   }
   .prose h2#table-of-contents + p {
     @apply hidden;
