@@ -8,6 +8,8 @@ import AuthorBio from "@components/AuthorBio.astro";
 import type { MarkdownInstance } from "astro";
 import type { Frontmatter } from "src/types";
 import slugify from "@utils/slugify";
+import ArticleSchema from "@components/ArticleSchema.astro";
+import { SITE } from "src/config";
 
 export interface Props {
   post: MarkdownInstance<Frontmatter>;
@@ -31,9 +33,31 @@ const {
 
 const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
   .href;
+
+const postSlug = slugify(frontmatter);
+const postUrl = new URL(`/posts/${postSlug}`, Astro.site ?? SITE.website).href;
+
+const publishedDate = new Date(datetime);
+const datePublishedIso = Number.isFinite(publishedDate.getTime())
+  ? publishedDate.toISOString()
+  : undefined;
 ---
 
 <Layout title={title} author={author} description={description} ogImage={ogUrl}>
+  {
+    datePublishedIso && (
+      <ArticleSchema
+        slot="head"
+        title={title}
+        description={description}
+        url={postUrl}
+        image={ogUrl}
+        datePublished={datePublishedIso}
+        authorName={author}
+        tags={tags}
+      />
+    )
+  }
   <Header />
   <div class="max-w-3xl mx-auto w-full px-2 flex justify-start">
     <button

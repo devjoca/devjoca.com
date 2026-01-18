@@ -148,6 +148,8 @@ const fallbackImageURL = new URL(SITE.ogImage, Astro.url.origin).href;
       )
     }
 
+    <slot name="head" />
+
     <script is:inline src="/toggle-theme.js"></script>
   </head>
   <body>

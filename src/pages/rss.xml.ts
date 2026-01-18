@@ -5,14 +5,14 @@ import type { MarkdownInstance } from "astro";
 import slugify from "@utils/slugify";
 
 const postImportResult = import.meta.glob<MarkdownInstance<Frontmatter>>(
-  "../contents/**/**/*.md",
+  "../contents/**/*.md",
   {
     eager: true,
   }
 );
 const posts = Object.values(postImportResult);
 
-export const get = () =>
+export const GET = () =>
   rss({
     title: SITE.title,
     description: SITE.desc,
