@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --breakpoint-sm: 640px;
@@ -67,6 +68,12 @@
   fill: rgb(var(--color-accent));
 }
 
+@utility focus-outline {
+  outline-offset: 1px;
+  outline: 2px solid rgb(var(--color-fill));
+  outline-style: dashed;
+}
+
 @layer base {
   :root,
   html[data-theme="light"] {
@@ -113,82 +120,82 @@
     inline-block fill-transparent stroke-2 stroke-current 
     group-hover:fill-transparent;
   }
+  /* Custom prose overrides - typography plugin handles spacing */
   .prose {
-    /* Basic prose styles using CSS instead of Tailwind variants */
+    @apply prose-h3:italic prose-img:mx-auto prose-ul:overflow-x-clip;
   }
-  .prose ul {
-    overflow-x: clip;
-  }
-  .prose img {
-    margin: 0 auto;
-    border: 2px solid rgb(var(--color-border));
-    margin-top: 0.5rem;
-  }
-  .prose h1,
-  .prose h2,
-  .prose h3,
-  .prose h4,
-  .prose h5,
-  .prose h6 {
-    margin-bottom: 0.75rem;
-  }
-  .prose th,
-  .prose td {
-    border: 1px solid rgb(var(--color-border));
-  }
-  .prose h3 {
-    font-style: italic;
-  }
-  .prose p,
-  .prose h1,
-  .prose h2,
-  .prose h3,
-  .prose h4,
-  .prose h5,
-  .prose h6,
-  .prose ol,
-  .prose ul {
+  .prose
+    :where(
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      ol,
+      ul,
+      strong,
+      em,
+      table,
+      pre,
+      figcaption
+    ):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     color: rgb(var(--color-text-base));
   }
-  .prose figcaption {
-    color: rgb(var(--color-text-base));
-    opacity: 0.7;
-  }
-  .prose code {
-    background-color: rgb(var(--color-card) / 0.75);
-    color: rgb(var(--color-text-base));
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-  }
-  .prose code::after,
-  .prose code::before {
-    content: "";
-  }
-  .prose strong,
-  .prose table {
-    color: rgb(var(--color-text-base));
-  }
-  .prose pre {
-    color: rgb(var(--color-text-base));
-  }
-  .prose hr {
-    border-color: rgb(var(--color-border));
-  }
-  .prose li::marker {
-    color: rgb(var(--color-accent));
-  }
-  .prose blockquote {
-    border-left-color: rgb(var(--color-accent) / 0.5);
-    border-left-width: 4px;
-    opacity: 0.8;
-  }
-  .prose a {
+  .prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     color: rgb(var(--color-text-base));
     text-decoration-style: dashed;
     text-underline-offset: 8px;
   }
-  .prose a:hover {
-    @apply hover:text-[rgb(var(--color-accent))];
+  .prose
+    :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)):hover {
+    color: rgb(var(--color-accent));
+  }
+  .prose
+    :where(blockquote):not(
+      :where([class~="not-prose"], [class~="not-prose"] *)
+    ) {
+    border-left-color: rgb(var(--color-accent) / 0.5);
+    opacity: 0.8;
+  }
+  .prose
+    :where(figcaption):not(
+      :where([class~="not-prose"], [class~="not-prose"] *)
+    ) {
+    opacity: 0.7;
+  }
+  .prose
+    :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    background-color: rgb(var(--color-card) / 0.75);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+  }
+  .prose
+    :where(code):not(
+      :where([class~="not-prose"], [class~="not-prose"] *)
+    )::before,
+  .prose
+    :where(code):not(
+      :where([class~="not-prose"], [class~="not-prose"] *)
+    )::after {
+    content: "";
+  }
+  .prose
+    :where(li):not(
+      :where([class~="not-prose"], [class~="not-prose"] *)
+    )::marker {
+    color: rgb(var(--color-accent));
+  }
+  .prose :where(img):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    border: 2px solid rgb(var(--color-border));
+  }
+  .prose :where(hr):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    border-color: rgb(var(--color-border));
+  }
+  .prose
+    :where(th, td):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    border: 1px solid rgb(var(--color-border));
   }
   .prose thead th:first-child,
   tbody td:first-child,
@@ -202,9 +209,7 @@
     @apply text-skin-base cursor-pointer inline-block select-none;
   }
   .prose summary {
-    outline-offset: 1px;
-    outline: 2px solid rgb(var(--color-fill));
-    outline-style: dashed;
+    @apply focus-outline;
   }
   .prose h2#table-of-contents + p {
     @apply hidden;
@@ -239,9 +244,6 @@
 @layer components {
   .display-none {
     @apply hidden;
-  }
-  .focus-outline {
-    @apply outline-offset-1 outline-skin-fill outline-2 focus-visible:outline-dashed focus-visible:no-underline;
   }
   .author-bio {
     display: flex;
