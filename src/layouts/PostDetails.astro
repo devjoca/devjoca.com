@@ -4,8 +4,10 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime";
+import AuthorBio from "@components/AuthorBio.astro";
 import type { MarkdownInstance } from "astro";
 import type { Frontmatter } from "src/types";
+import slugify from "@utils/slugify";
 
 export interface Props {
   post: MarkdownInstance<Frontmatter>;
@@ -13,7 +15,19 @@ export interface Props {
 
 const { frontmatter, Content } = Astro.props.post;
 
-const { title, author, description, ogImage, datetime, tags } = frontmatter;
+const {
+  title,
+  author,
+  description,
+  ogImage,
+  datetime,
+  tags,
+  showAuthorBio = true,
+  authorTitle,
+  authorYears,
+  authorByline,
+  authorImage,
+} = frontmatter;
 
 const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
   .href;
@@ -36,9 +50,34 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
   <main id="main-content">
     <h1 class="post-title">{title}</h1>
     <Datetime datetime={datetime} size="lg" className="my-2" />
+
+    {
+      showAuthorBio && (
+        <AuthorBio
+          name={author}
+          title={authorTitle}
+          years={authorYears}
+          byline={authorByline}
+          image={authorImage}
+        />
+      )
+    }
+
     <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose">
       <Content />
     </article>
+
+    {
+      showAuthorBio && (
+        <AuthorBio
+          name={author}
+          title={authorTitle}
+          years={authorYears}
+          byline={authorByline}
+          image={authorImage}
+        />
+      )
+    }
 
     <ul class="tags-container">
       {tags.map(tag => <Tag name={tag} />)}

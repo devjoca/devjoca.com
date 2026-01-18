@@ -1,0 +1,134 @@
+---
+import { SITE, SOCIALS } from "src/config";
+
+export interface Props {
+  name?: string;
+  title?: string;
+  years?: string;
+  byline?: string;
+  image?: string;
+}
+
+const {
+  name = SITE.author,
+  title = "Senior Developer",
+  years = "8 years of experience",
+  byline = SITE.desc,
+  image = "/joca.png",
+} = Astro.props;
+
+const github = SOCIALS.find(s => s.name === "Github");
+const linkedin = SOCIALS.find(s => s.name === "LinkedIn");
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name,
+  jobTitle: title,
+  description: byline,
+  url: SITE.website,
+  image,
+  sameAs: [github?.href, linkedin?.href].filter(Boolean),
+};
+---
+
+<aside class="author-bio">
+  <img src={image} alt={name} class="author-avatar" />
+  <div class="author-info">
+    <h3 class="author-name">{name}</h3>
+    <p class="author-credentials">
+      {title}
+      {years && <span class="credentials-separator">•</span>}
+      {years && <span>{years}</span>}
+    </p>
+    <p class="author-byline">{byline}</p>
+    <div class="author-links">
+      {
+        github && (
+          <a href={github.href} title={github.linkTitle} class="author-link">
+            GitHub
+          </a>
+        )
+      }
+      {
+        linkedin && (
+          <a
+            href={linkedin.href}
+            title={linkedin.linkTitle}
+            class="author-link"
+          >
+            LinkedIn
+          </a>
+        )
+      }
+    </div>
+  </div>
+</aside>
+
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+<style>
+  @reference "../styles/base.css";
+  .author-bio {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    background-color: rgb(var(--color-card));
+    border-radius: 0.5rem;
+    margin: 2rem 0;
+    border: 1px solid rgb(var(--color-border));
+  }
+
+  .author-avatar {
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .author-info {
+    flex: 1;
+  }
+
+  .author-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: rgb(var(--color-text-base));
+    margin: 0 0 0.25rem 0;
+  }
+
+  .author-credentials {
+    font-size: 0.875rem;
+    color: rgb(var(--color-accent));
+    margin: 0 0 0.5rem 0;
+  }
+
+  .credentials-separator {
+    margin: 0 0.25rem;
+  }
+
+  .author-byline {
+    font-size: 0.875rem;
+    color: rgb(var(--color-text-base));
+    opacity: 0.8;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .author-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .author-link {
+    font-size: 0.875rem;
+    color: rgb(var(--color-accent));
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+
+  .author-link:hover {
+    opacity: 0.7;
+  }
+</style>
