@@ -155,7 +155,7 @@
     opacity: 0.7;
   }
   .prose code {
-    background-color: rgb(var(--color-card));
+    background-color: rgb(var(--color-card) / 0.75);
     color: rgb(var(--color-text-base));
     padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
@@ -178,11 +178,16 @@
     color: rgb(var(--color-accent));
   }
   .prose blockquote {
-    border-left-color: rgb(var(--color-accent));
+    border-left-color: rgb(var(--color-accent) / 0.5);
     border-left-width: 4px;
     opacity: 0.8;
   }
   .prose a {
+    color: rgb(var(--color-text-base));
+    text-decoration-style: dashed;
+    text-underline-offset: 8px;
+  }
+  .prose a:hover {
     @apply hover:text-[rgb(var(--color-accent))];
   }
   .prose thead th:first-child,
