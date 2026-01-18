@@ -67,18 +67,6 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
       <Content />
     </article>
 
-    {
-      showAuthorBio && (
-        <AuthorBio
-          name={author}
-          title={authorTitle}
-          years={authorYears}
-          byline={authorByline}
-          image={authorImage}
-        />
-      )
-    }
-
     <ul class="tags-container">
       {tags.map(tag => <Tag name={tag} />)}
     </ul>
