@@ -6,6 +6,7 @@ import remarkCollapse from "remark-collapse";
 import { visit } from "unist-util-visit";
 import sitemap from "@astrojs/sitemap";
 import compress from "@playform/compress";
+import mermaid from "astro-mermaid";
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,6 +18,18 @@ export default defineConfig({
     },
   },
   integrations: [
+    mermaid({
+      autoTheme: true, // Syncs with html data-theme attribute
+      theme: "neutral", // Better for blogs than 'default'
+      themeVariables: {
+        primaryColor: "#006cac", // Match site accent color
+        primaryTextColor: "#282728",
+        primaryBorderColor: "#006cac",
+        lineColor: "#282728",
+        secondaryColor: "#1ad9d9",
+        tertiaryColor: "#f5fefb",
+      },
+    }),
     react(),
     sitemap(),
     compress(), // Compression must be last

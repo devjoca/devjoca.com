@@ -215,6 +215,21 @@
     @apply hidden;
   }
 
+  /* ===== Mermaid diagrams ===== */
+  .mermaid {
+    @apply mx-auto my-8 max-w-full;
+    min-height: 400px;
+  }
+
+  .prose .mermaid {
+    @apply mx-auto my-8 max-w-full;
+    min-height: 400px;
+  }
+
+  .prose .mermaid svg {
+    @apply w-full rounded-lg border border-skin-line;
+  }
+
   /* ===== scrollbar ===== */
   html {
     overflow-y: scroll;
