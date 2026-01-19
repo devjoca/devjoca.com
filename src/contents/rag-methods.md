@@ -133,8 +133,8 @@ Pass a bigger number of documents to the Reranker, which is an LLM that takes th
 ```mermaid
 flowchart TD
     Q[User Query] --> S[Vector Search]
-    S -->|Chunk 5 Match| C[Identify Related Chunks]
-    C -->|Chunk 4,5,6| R[Reconstruct Parent Doc]
+    S -->|"Chunk 5 Match"| C[Identify Related Chunks]
+    C -->|"Chunk 4,5,6"| R[Reconstruct Parent Doc]
     R --> Ctx[Full Context]
     Ctx --> L[LLM Response]
 
