@@ -23,11 +23,11 @@ flowchart TD
     B -->|Simple Docs| C[Vector Search]
     B -->|Filter Noise| D[Contextual Compression]
     B -->|Complex Query| E[Rewrite-Retrieve-Read]
-    B -->|Max Accuracy| F[Retrieval + Reranking]
+    B -->|Max Accuracy| F["Retrieval + Reranking"]
     B -->|Chunk Boundaries| G[Parent Document]
 
     C --> H[Vector DB Search]
-    D --> I[Filter + Score]
+    D --> I["Filter + Score"]
     E --> J[LLM Query Enhancement]
     F --> K[Scored Ranking]
     G --> L[Chunk Reconstruction]
@@ -61,7 +61,7 @@ This is the nave approach where we use a method called similarity search to retr
 flowchart TD
     Q[User Query] --> V[Vector DB]
     V -->|Raw Documents| F[Filter]
-    V -->|n=20 docs| F
+    V -->|"n=20 docs"| F
 
     F -->|Score Filter| R[Relevant Only]
     F -->|LLM Filter| R
@@ -111,10 +111,10 @@ Basically in this approach, we ask the LLM to rewrite the user query, it will ge
 ```mermaid
 flowchart TD
     Q[User Query] --> I[Initial Search]
-    I -->|n=50 docs| R[Reranker LLM]
+    I -->|"n=50 docs"| R[Reranker LLM]
     R --> S[Scoring]
     S --> T[Top-K Selection]
-    T -->|k=5| C[Filtered Context]
+    T -->|"k=5"| C[Filtered Context]
     C --> L[LLM Response]
 
     subgraph Scoring Process
