@@ -194,8 +194,17 @@
     border-color: rgb(var(--color-border));
   }
   .prose
+    :where(table):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+  .prose
     :where(th, td):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     border: 1px solid rgb(var(--color-border));
+    padding: 0.5rem 0.75rem;
+    white-space: normal;
   }
   .prose thead th:first-child,
   tbody td:first-child,
