@@ -17,9 +17,9 @@ const posts = Object.values(
 );
 
 const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(
-  ({ frontmatter }) => frontmatter.featured
-);
+const featuredPosts = sortedPosts
+  .filter(({ frontmatter }) => frontmatter.featured)
+  .slice(0, 1);
 
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
