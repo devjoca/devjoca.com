@@ -1,7 +1,7 @@
 ---
 author: Joca Pereyra
 datetime: 2026-03-07T12:00:00Z
-title: "How OpenClaw Manages Context in a Never-Ending Conversation"
+title: "How OpenClaw manages context in a never-ending conversation"
 slug: how-openclaw-manages-context-never-ending-conversation
 featured: true
 tags:

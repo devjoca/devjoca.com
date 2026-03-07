@@ -1,7 +1,7 @@
 ---
 author: Joca Pereyra
 datetime: 2024-04-12T10:22:00Z
-title: Advanced Retrieval Strategies
+title: Advanced retrieval strategies
 slug: advance-retrieval-strategies
 featured: true
 tags:
