@@ -15,7 +15,7 @@ description: Explore advanced retrieval strategies that enhance the integration 
 
 In this article, we explore effective strategies for integrating vector databases with large language models (LLMs). Learn about the latest techniques in similarity search, contextual compression, and more, to enhance how your systems process and retrieve documents for relevant answers. This small guide is ideal for developers and technologists looking to update your AI applications.
 
-## Strategy Overview
+## Strategy overview
 
 ```mermaid
 flowchart TD
@@ -45,7 +45,7 @@ flowchart TD
     style G fill:#f3e5f5
 ```
 
-## Vector Search
+## Vector search
 
 This is the nave approach where we use a method called similarity search to retrieve documents from a vector database. Once we have obtained the documents, we feed them into a large language model (LLM) to produce results
 
@@ -55,7 +55,7 @@ This is the nave approach where we use a method called similarity search to retr
 - Limited context relevance
 - Bad retrievals or return irrelevant chunks
 
-## Contextual Compression
+## Contextual compression
 
 ```mermaid
 flowchart TD
@@ -87,7 +87,7 @@ We use a vector database to find documents, and before giving them to the large 
 1. Tell the LLM to remove documents that are not relevant
 2. Only retrieve the most similar documents by filtering the relevance score
 
-## Rewrite, Retrieve and Read
+## Rewrite, retrieve and read
 
 ```mermaid
 flowchart LR
@@ -106,7 +106,7 @@ flowchart LR
 
 Basically in this approach, we ask the LLM to rewrite the user query, it will generate better results since the LLM is so good at understanding purposes and meanings
 
-## Retrieval with Reranking
+## Retrieval with reranking
 
 ```mermaid
 flowchart TD
@@ -128,7 +128,7 @@ flowchart TD
 
 Pass a bigger number of documents to the Reranker, which is an LLM that takes the query and the documents and returns a relevance score to filter out documents
 
-## Parent Document retrieval
+## Parent document retrieval
 
 ```mermaid
 flowchart TD
@@ -161,7 +161,7 @@ flowchart TD
 
 Fix the issue when your query is in the middle of 2 chunks of documents stored in the vector db. In this case, we combine multiple contiguous chunks related to the most relevant chunk to give the LLM full context to answer the query, it will depend on how we are splitting our chunks.
 
-## Strategy Selection Guide
+## Strategy selection guide
 
 ```mermaid
 flowchart TD

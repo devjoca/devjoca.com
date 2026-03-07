@@ -14,7 +14,7 @@ description: A short story about this blog
 Since the last year I was trying to put some effort on a side project in order to learn some amazing new technologies or just for fun.
 There are a lot of complicated things about side projects, but for me was to actually start something so I choose building my personal blog to fill that purpose.
 
-## The Stack 🏗
+## The stack 🏗
 
 I like to consider me as a backend developer, however as most of us, sometimes we had to interact with some UI and one on the first technologies I learned after jQuery was VueJS. Time ago, with my experience on Vue, I pick Nuxt.js to develop a very simple landing website and it was really fun and a nice experience.
 

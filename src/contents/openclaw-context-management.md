@@ -30,7 +30,7 @@ I'm currently building a flight deals bot on Telegram (more on that in a future 
 
 So I went into the codebase.
 
-## The Fundamental Separation
+## The fundamental separation
 
 The first thing that clicked for me is that OpenClaw separates the interface layer (where messages come from, Telegram, CLI, whatever) from the assistant runtime (where the actual intelligence lives).
 
