@@ -1,5 +1,6 @@
 {
   "name": "devjoca",
+  "account_id": "4e7aa475715a25f32320a7a05bca0dac",
   "compatibility_date": "2026-01-16",
   "assets": {
     "directory": "./dist"

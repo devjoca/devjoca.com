@@ -26,7 +26,7 @@ A continuous conversation going on **forever**. Think about how different that i
 
 That got me curious. LLMs have finite context windows. So how do you actually manage context in a conversation that never ends?
 
-I'm currently building a flight deals bot on Telegram (more on that in a future post), and my architecture is way more isolated, one session per user, scoped interactions. But I wanted to learn from how OpenClaw handles this at a bigger scale.
+I'm currently building a CRM bot on Telegram (more on that in a future post), and my architecture is way more isolated, one session per user, scoped interactions. But I wanted to learn from how OpenClaw handles this at a bigger scale.
 
 So I went into the codebase.
 
@@ -80,7 +80,7 @@ The JSONL transcripts are not flat logs. Each entry has an `id` and `parentId`, 
 
 The SQLite database is used for semantic search over memory files (like `MEMORY.md`). It stores chunked and embedded content that the agent can query when it needs to recall something. It doesn't store raw chat history, that stays in the JSONL files.
 
-For my flight bot, I'm keeping it simpler: each `chat_id` maps to an in-memory session. But if I ever need persistence, the JSONL-per-session pattern works well.
+For my CRM bot, I'm keeping it simpler: each `chat_id` maps to an in-memory session. But if I ever need persistence, the JSONL-per-session pattern works well.
 
 ## Context overflow and compaction
 
@@ -125,9 +125,9 @@ For my bot, I'm starting with a `memory` string per user that gets injected into
 
 ## What I'm taking from this
 
-I'm not building OpenClaw. My flight bot has a completely different scope, isolated per-user sessions, no shared group chats, no heartbeat loops. But some of these patterns translate directly:
+I'm not building OpenClaw. My CRM bot has a completely different scope, isolated per-user sessions, no shared group chats, no heartbeat loops. But some of these patterns translate directly:
 
-| OpenClaw                        | My flight bot                                           |
+| OpenClaw                        | My CRM bot                                              |
 | ------------------------------- | ------------------------------------------------------- |
 | Session key per agent           | `chat_id` as session key                                |
 | `.jsonl` transcript per session | In-memory list (Redis if I need persistence)            |
