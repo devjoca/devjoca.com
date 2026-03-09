@@ -10,23 +10,22 @@
     "astro": "astro",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
-    "cz": "cz",
     "prepare": "husky install"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.15",
     "@playform/compress": "^0.2.1",
-    "@tailwindcss/vite": "^4.1.18",
+    "@tailwindcss/vite": "^4.2.1",
     "@types/sanitize-html": "^2.16.1",
-    "astro": "^5.16.10",
+    "astro": "^5.18.0",
     "astro-mermaid": "^1.3.1",
     "fuse.js": "^7.1.0",
     "github-slugger": "^2.0.0",
-    "mermaid": "^11.12.2",
+    "mermaid": "^11.13.0",
     "remark-collapse": "^0.1.2",
     "remark-toc": "^9.0.0",
     "sanitize-html": "^2.17.1",
-    "satori": "^0.18.3"
+    "satori": "^0.18.4"
   },
   "devDependencies": {
     "@astrojs/react": "^4.4.2",
@@ -34,16 +33,20 @@
     "@tailwindcss/typography": "^0.5.19",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
-    "prettier": "^3.4.2",
+    "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
     "react": "^18.3.1",
-    "tailwindcss": "^4.1.18",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^4.2.1",
     "wrangler": "^4.71.0"
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
+  "overrides": {
+    "cross-spawn": "7.0.6",
+    "devalue": "5.6.3",
+    "dompurify": "3.3.2",
+    "fast-xml-parser": "5.4.2",
+    "rollup": "4.59.0",
+    "svgo": "4.0.1"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,astro,css,md,json}": [
