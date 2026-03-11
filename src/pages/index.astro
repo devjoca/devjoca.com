@@ -124,7 +124,14 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     @apply pt-8 pb-6;
   }
   #hero h1 {
-    @apply inline-block font-bold my-4 sm:my-8 text-3xl sm:text-5xl;
+    @apply inline-block font-bold my-4 sm:my-8;
+    font-family: var(--font-pixel);
+    font-size: 1.5rem;
+  }
+  @media (min-width: 640px) {
+    #hero h1 {
+      font-size: 2rem;
+    }
   }
   #hero .rss-link {
     @apply mb-6;
@@ -149,7 +156,9 @@ const socialCount = SOCIALS.filter(social => social.active).length;
   }
   #featured h2,
   #recent-posts h2 {
-    @apply font-semibold text-2xl tracking-wide;
+    @apply font-semibold tracking-wide;
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
   }
   .all-posts-btn-wrapper {
     @apply text-center my-8;

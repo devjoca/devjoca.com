@@ -16,6 +16,8 @@
   --color-border: rgb(var(--color-border));
 
   --font-mono: "IBM Plex Mono", "monospace";
+  --font-pixel: "Press Start 2P", "monospace";
+  --font-heading: "Space Mono", "monospace";
 }
 
 @utility text-skin-base {
@@ -77,20 +79,20 @@
 @layer base {
   :root,
   html[data-theme="light"] {
-    --color-fill: 251, 254, 251;
-    --color-text-base: 40, 39, 40;
-    --color-accent: 0, 108, 172;
-    --color-card: 230, 230, 230;
-    --color-card-muted: 205, 205, 205;
-    --color-border: 236, 233, 233;
+    --color-fill: 251, 248, 250;
+    --color-text-base: 40, 30, 50;
+    --color-accent: 180, 50, 120;
+    --color-card: 235, 225, 235;
+    --color-card-muted: 215, 200, 215;
+    --color-border: 230, 220, 230;
   }
   html[data-theme="dark"] {
-    --color-fill: 47, 55, 65;
-    --color-text-base: 230, 230, 230;
-    --color-accent: 26, 217, 217;
-    --color-card: 63, 75, 90;
-    --color-card-muted: 89, 107, 129;
-    --color-border: 59, 70, 85;
+    --color-fill: 22, 14, 30;
+    --color-text-base: 230, 220, 235;
+    --color-accent: 235, 159, 194;
+    --color-card: 40, 28, 55;
+    --color-card-muted: 60, 42, 80;
+    --color-border: 50, 35, 68;
   }
   #sun-svg,
   html[data-theme="dark"] #moon-svg {
@@ -125,6 +127,12 @@
     @apply prose-h3:italic prose-img:mx-auto prose-ul:overflow-x-clip;
   }
   .prose
+    :where(h1, h2, h3, h4, h5, h6):not(
+      :where([class~="not-prose"], [class~="not-prose"] *)
+    ) {
+    font-family: var(--font-heading);
+  }
+  .prose
     :where(
       p,
       h1,
@@ -143,6 +151,7 @@
     ):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     color: rgb(var(--color-text-base));
   }
+
   .prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     color: rgb(var(--color-text-base));
     text-decoration-style: dashed;
@@ -319,4 +328,11 @@
   .author-link:hover {
     opacity: 0.7;
   }
+}
+
+/* Dark mode heading accent — outside @layer to override typography plugin */
+html[data-theme="dark"] .prose h1,
+html[data-theme="dark"] .prose h2,
+html[data-theme="dark"] .prose h3 {
+  color: rgb(var(--color-accent));
 }

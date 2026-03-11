@@ -104,7 +104,9 @@ const datePublishedIso = Number.isFinite(publishedDate.getTime())
     @apply max-w-3xl mx-auto px-4 pb-12 w-full;
   }
   .post-title {
-    @apply font-semibold text-2xl text-skin-accent;
+    @apply font-semibold text-skin-accent;
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
   }
   .tags-container {
     @apply my-8;

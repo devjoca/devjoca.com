@@ -19,10 +19,10 @@ export default defineConfig({
   },
   integrations: [
     mermaid({
-      autoTheme: true, // Syncs with html data-theme attribute
-      theme: "neutral", // Better for blogs than 'default'
+      autoTheme: true,
+      theme: "neutral",
       themeVariables: {
-        primaryColor: "#006cac", // Match site accent color
+        primaryColor: "#006cac",
         primaryTextColor: "#282728",
         primaryBorderColor: "#006cac",
         lineColor: "#282728",
