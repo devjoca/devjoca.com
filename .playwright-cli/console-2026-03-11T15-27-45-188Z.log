@@ -1,1 +1,0 @@
-[   68505ms] [ERROR] WebSocket connection to 'ws://localhost:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4322/@vite/client:1766
