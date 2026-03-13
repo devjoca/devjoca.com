@@ -1,0 +1,153 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "Skip to content" [ref=e3] [cursor=pointer]:
+      - /url: "#main-content"
+    - generic [ref=e5]:
+      - link "devjoca" [ref=e6] [cursor=pointer]:
+        - /url: /
+      - navigation [ref=e7]:
+        - menu [ref=e8]:
+          - listitem [ref=e9]:
+            - link "Posts" [ref=e10] [cursor=pointer]:
+              - /url: /posts
+          - listitem [ref=e11]:
+            - link "Tags" [ref=e12] [cursor=pointer]:
+              - /url: /tags
+          - listitem [ref=e13]:
+            - link "search" [ref=e14] [cursor=pointer]:
+              - /url: /search
+              - img [ref=e15]
+          - listitem [ref=e17]:
+            - button "dark" [ref=e18]:
+              - img [ref=e19]
+    - separator [ref=e22]
+  - button "Go back" [ref=e24]:
+    - img [ref=e25]
+    - generic [ref=e27]: Go back
+  - main [ref=e28]:
+    - heading "Advanced retrieval strategies" [level=1] [ref=e29]
+    - generic [ref=e30]:
+      - img [ref=e31]
+      - generic [ref=e34]: "Posted on:"
+      - generic [ref=e35]:
+        - text: April 12, 2024 |
+        - generic [ref=e36]: at
+        - text: 05:22 AM
+    - complementary [ref=e37]:
+      - img "Joca Pereyra" [ref=e38]
+      - generic [ref=e39]:
+        - heading "Joca Pereyra" [level=3] [ref=e40]
+        - paragraph [ref=e41]: Senior Developer • 8 years of experience
+        - paragraph [ref=e42]: Welcome to Joca's tech blog! Join me, a seasoned backend developer, as I delve into the latest advancements in technology and AI/ML. I bring expertise in PHP, Python, Node.js, and TypeScript, and share my knowledge and insights through tutorials and tips. Stay ahead of the game and join me on this journey to continually improve and explore the world of software engineering.
+        - generic [ref=e43]:
+          - link "GitHub" [ref=e44] [cursor=pointer]:
+            - /url: https://github.com/devjoca
+          - link "LinkedIn" [ref=e45] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/josecarlos-pereyra
+    - article [ref=e46]:
+      - paragraph [ref=e47]: In this article, we explore effective strategies for integrating vector databases with large language models (LLMs). Learn about the latest techniques in similarity search, contextual compression, and more, to enhance how your systems process and retrieve documents for relevant answers. This small guide is ideal for developers and technologists looking to update your AI applications.
+      - heading "Strategy overview" [level=2] [ref=e48]
+      - document [ref=e50]:
+        - generic [ref=e52]:
+          - generic [ref=e62]:
+            - paragraph [ref=e68]: Simple Docs
+            - paragraph [ref=e74]: Filter Noise
+            - paragraph [ref=e80]: Complex Query
+            - paragraph [ref=e86]: Max Accuracy
+            - paragraph [ref=e92]: Chunk Boundaries
+          - generic [ref=e93]:
+            - paragraph [ref=e100]: User Query
+            - paragraph [ref=e107]: Choose Strategy
+            - paragraph [ref=e114]: Vector Search
+            - paragraph [ref=e121]: Contextual Compression
+            - paragraph [ref=e128]: Rewrite-Retrieve-Read
+            - paragraph [ref=e135]: Retrieval + Reranking
+            - paragraph [ref=e142]: Parent Document
+            - paragraph [ref=e149]: Vector DB Search
+            - paragraph [ref=e156]: Filter + Score
+            - paragraph [ref=e163]: LLM Query Enhancement
+            - paragraph [ref=e170]: Scored Ranking
+            - paragraph [ref=e177]: Chunk Reconstruction
+            - paragraph [ref=e184]: LLM Response
+      - heading "Vector search" [level=2] [ref=e185]
+      - paragraph [ref=e186]: This is the nave approach where we use a method called similarity search to retrieve documents from a vector database. Once we have obtained the documents, we feed them into a large language model (LLM) to produce results
+      - heading "Issues" [level=3] [ref=e187]
+      - list [ref=e188]:
+        - listitem [ref=e189]: Large doc chunks reduce the quality of the retrieval process
+        - listitem [ref=e190]: Limited context relevance
+        - listitem [ref=e191]: Bad retrievals or return irrelevant chunks
+      - heading "Contextual compression" [level=2] [ref=e192]
+      - generic [ref=e193]: flowchart TD Q[User Query] --> V[Vector DB] V -->|Raw Documents| F[Filter] V -->|"n=20 docs"| F F -->|Score Filter| R[Relevant Only] F -->|LLM Filter| R R --> C[Compressed Context] C --> LLM[LLM Input] LLM --> A[Response] subgraph Filtering Options F1[Relevance Score Threshold] F2[LLM Relevance Assessment] end F --> F1 F --> F2 style R fill:#c8e6c9 style C fill:#bbdefb
+      - paragraph [ref=e194]: "We use a vector database to find documents, and before giving them to the large language model (LLM), we can take one or both actions:"
+      - list [ref=e195]:
+        - listitem [ref=e196]: Tell the LLM to remove documents that are not relevant
+        - listitem [ref=e197]: Only retrieve the most similar documents by filtering the relevance score
+      - heading "Rewrite, retrieve and read" [level=2] [ref=e198]
+      - generic [ref=e199]: "flowchart LR Q[Original Query] --> R[LLM Rewriter] R --> E[Enhanced Query] E --> S[Vector Search] S --> M[Retrieved Docs] M --> L[LLM Response] L --> G{Q Satisfied?} G -->|No| R G -->|Yes| F[Final Answer] style E fill:#e8f5e9 style G fill:#fff3e0"
+      - paragraph [ref=e200]: Basically in this approach, we ask the LLM to rewrite the user query, it will generate better results since the LLM is so good at understanding purposes and meanings
+      - heading "Retrieval with reranking" [level=2] [ref=e201]
+      - generic [ref=e202]: flowchart TD Q[User Query] --> I[Initial Search] I -->|"n=50 docs"| R[Reranker LLM] R --> S[Scoring] S --> T[Top-K Selection] T -->|"k=5"| C[Filtered Context] C --> L[LLM Response] subgraph Scoring Process R --> S S --> T end style T fill:#c8e6c9 style C fill:#bbdefb
+      - paragraph [ref=e203]: Pass a bigger number of documents to the Reranker, which is an LLM that takes the query and the documents and returns a relevance score to filter out documents
+      - heading "Parent document retrieval" [level=2] [ref=e204]
+      - generic [ref=e205]: flowchart TD Q[User Query] --> S[Vector Search] S -->|"Chunk 5 Match"| C[Identify Related Chunks] C -->|"Chunk 4,5,6"| R[Reconstruct Parent Doc] R --> Ctx[Full Context] Ctx --> L[LLM Response] subgraph Chunk Management P[Parent Document] C1[Chunk 1] C2[Chunk 2] C3[Chunk 3] C4[Chunk 4] C5[Chunk 5] C6[Chunk 6] P --> C1 P --> C2 P --> C3 P --> C4 P --> C5 P --> C6 end style R fill:#e8f5e9 style Ctx fill:#bbdefb
+      - paragraph [ref=e206]: Fix the issue when your query is in the middle of 2 chunks of documents stored in the vector db. In this case, we combine multiple contiguous chunks related to the most relevant chunk to give the LLM full context to answer the query, it will depend on how we are splitting our chunks.
+      - heading "Strategy selection guide" [level=2] [ref=e207]
+      - generic [ref=e208]: "flowchart TD Start([Start]) --> Q1{Simple Query?} Q1 -->|Yes| Q2{Small Docs?} Q1 -->|No| Q3{High Accuracy?} Q2 -->|Yes| VS[Vector Search] Q2 -->|No| Q4{Chunk Issues?} Q3 -->|Yes| RR[Reranking] Q3 -->|No| Q5{Complex Query?} Q4 -->|Yes| PDR[Parent Document] Q4 -->|No| CC[Contextual Compression] Q5 -->|Yes| RRR[Rewrite-Retrieve-Read] Q5 -->|No| CC VS --> End([Recommended]) CC --> End RRR --> End RR --> End PDR --> End style VS fill:#e1f5fe style CC fill:#fff3e0 style RRR fill:#e8f5e9 style RR fill:#fce4ec style PDR fill:#f3e5f5"
+      - paragraph [ref=e209]: "Reference:"
+      - list [ref=e210]:
+        - listitem [ref=e211]:
+          - 'link "RAGOps: Advanced Retrieval Strategies with LangChain, Langsmith and Supabase." [ref=e212] [cursor=pointer]':
+            - /url: https://www.youtube.com/watch?v=EuHderGVUs8
+        - listitem [ref=e213]:
+          - link "Query Rewriting for Retrieval-Augmented Large Language Models" [ref=e214] [cursor=pointer]:
+            - /url: ERReadad
+        - listitem [ref=e215]:
+          - link "Cohere Rerank" [ref=e216] [cursor=pointer]:
+            - /url: https://cohere.com/rerank
+        - listitem [ref=e217]:
+          - link "Parent Document Retriever" [ref=e218] [cursor=pointer]:
+            - /url: https://python.langchain.com/docs/modules/data_connection/retrievers/parent_document_retriever/
+    - list [ref=e219]:
+      - listitem [ref=e220]:
+        - link "post" [ref=e221] [cursor=pointer]:
+          - /url: /tags/post
+          - img [ref=e222]
+          - text: post
+      - listitem [ref=e224]:
+        - link "LLM" [ref=e225] [cursor=pointer]:
+          - /url: /tags/LLM
+          - img [ref=e226]
+          - text: LLM
+      - listitem [ref=e228]:
+        - link "RAG" [ref=e229] [cursor=pointer]:
+          - /url: /tags/RAG
+          - img [ref=e230]
+          - text: RAG
+  - contentinfo [ref=e232]:
+    - separator [ref=e234]
+    - generic [ref=e235]:
+      - generic [ref=e236]:
+        - link "devjoca on Github" [ref=e237] [cursor=pointer]:
+          - /url: https://github.com/devjoca
+          - img [ref=e238]
+        - link "devjoca on LinkedIn" [ref=e241] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/josecarlos-pereyra
+          - img [ref=e242]
+      - generic [ref=e246]:
+        - generic [ref=e247]: Copyright © 2026
+        - generic [ref=e248]: "|"
+        - generic [ref=e249]: All rights reserved.
+  - generic [ref=e252]:
+    - button "Menu" [ref=e253]:
+      - img [ref=e255]
+      - generic: Menu
+    - button "Inspect" [ref=e259]:
+      - img [ref=e261]
+      - generic: Inspect
+    - button "Audit" [ref=e263]:
+      - img [ref=e265]
+      - generic: Audit
+    - button "Settings" [ref=e268]:
+      - img [ref=e270]
+      - generic: Settings
+  - img [ref=e274]

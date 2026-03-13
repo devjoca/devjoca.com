@@ -153,7 +153,7 @@
   }
 
   .prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-    color: rgb(var(--color-text-base));
+    color: rgb(var(--color-accent));
     text-decoration-style: dashed;
     text-underline-offset: 8px;
   }
@@ -209,8 +209,14 @@
     -webkit-overflow-scrolling: touch;
     white-space: nowrap;
   }
-  .prose
-    :where(th, td):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  .prose :where(th):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    border: 1px solid rgb(var(--color-border));
+    padding: 0.5rem 0.75rem;
+    white-space: normal;
+    color: rgb(var(--color-accent));
+    font-weight: 600;
+  }
+  .prose :where(td):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     border: 1px solid rgb(var(--color-border));
     padding: 0.5rem 0.75rem;
     white-space: normal;
@@ -330,9 +336,21 @@
   }
 }
 
-/* Dark mode heading accent — outside @layer to override typography plugin */
+/* Dark mode overrides — outside @layer to override typography plugin */
 html[data-theme="dark"] .prose h1,
 html[data-theme="dark"] .prose h2,
 html[data-theme="dark"] .prose h3 {
+  color: rgb(var(--color-accent));
+}
+
+html[data-theme="dark"] .prose a {
+  color: rgb(var(--color-accent));
+}
+
+html[data-theme="dark"] .prose th {
+  color: rgb(var(--color-accent));
+}
+
+html[data-theme="dark"] .prose code {
   color: rgb(var(--color-accent));
 }

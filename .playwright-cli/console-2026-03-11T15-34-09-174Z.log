@@ -1,0 +1,50 @@
+Total messages: 49 (Errors: 0, Warnings: 0)
+Returning 47 messages for level "info"
+
+[LOG] [astro-mermaid] Mermaid diagrams detected on initial load @ http://localhost:4322/@id/astro:scripts/page.js:127
+[LOG] [astro-mermaid] Initializing mermaid diagrams... @ http://localhost:4322/@id/astro:scripts/page.js:52
+[LOG] [astro-mermaid] Found 6 mermaid diagrams @ http://localhost:4322/@id/astro:scripts/page.js:55
+[LOG] [astro-mermaid] Loading mermaid.js... @ http://localhost:4322/@id/astro:scripts/page.js:13
+[LOG] [astro-mermaid] Initializing mermaid diagrams... @ http://localhost:4322/@id/astro:scripts/page.js:52
+[LOG] [astro-mermaid] Found 6 mermaid diagrams @ http://localhost:4322/@id/astro:scripts/page.js:55
+[LOG] [astro-mermaid] Using theme: dark from html @ http://localhost:4322/@id/astro:scripts/page.js:73
+[LOG] [astro-mermaid] Rendering diagram: mermaid-m0wm6f0hh @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Using theme: dark from html @ http://localhost:4322/@id/astro:scripts/page.js:73
+[LOG] [astro-mermaid] Rendering diagram: mermaid-xp0vik6cv @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-m0wm6f0hh @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Rendering diagram: mermaid-gv8mcb2en @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-xp0vik6cv @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Rendering diagram: mermaid-5fucw96w6 @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-gv8mcb2en @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Rendering diagram: mermaid-wbe1zcchb @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-5fucw96w6 @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Rendering diagram: mermaid-qugiasfk4 @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-wbe1zcchb @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Rendering diagram: mermaid-lc9s5j47r @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-qugiasfk4 @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Rendering diagram: mermaid-q5rushtdz @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-lc9s5j47r @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Rendering diagram: mermaid-ox5yhwrs3 @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-q5rushtdz @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Rendering diagram: mermaid-5xxt6ibg6 @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-ox5yhwrs3 @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Rendering diagram: mermaid-5dnof7kpe @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-5xxt6ibg6 @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Rendering diagram: mermaid-e39rq2f7b @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-5dnof7kpe @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-e39rq2f7b @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Initializing mermaid diagrams... @ http://localhost:4322/@id/astro:scripts/page.js:52
+[LOG] [astro-mermaid] Found 6 mermaid diagrams @ http://localhost:4322/@id/astro:scripts/page.js:55
+[LOG] [astro-mermaid] Using theme: dark from html @ http://localhost:4322/@id/astro:scripts/page.js:73
+[LOG] [astro-mermaid] Rendering diagram: mermaid-aodfgfa5c @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-aodfgfa5c @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Rendering diagram: mermaid-sw12odqvs @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-sw12odqvs @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Rendering diagram: mermaid-7nk6apd67 @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-7nk6apd67 @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Rendering diagram: mermaid-9scjteaxq @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-9scjteaxq @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Rendering diagram: mermaid-0sof1ehiw @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-0sof1ehiw @ http://localhost:4322/@id/astro:scripts/page.js:113
+[LOG] [astro-mermaid] Rendering diagram: mermaid-yvhq5o004 @ http://localhost:4322/@id/astro:scripts/page.js:101
+[LOG] [astro-mermaid] Successfully rendered diagram: mermaid-yvhq5o004 @ http://localhost:4322/@id/astro:scripts/page.js:113
