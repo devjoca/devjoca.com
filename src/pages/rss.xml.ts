@@ -20,13 +20,16 @@ export const GET = () =>
     site: SITE.website,
     items: posts
       .filter(({ frontmatter }) => !frontmatter.draft)
-      .map(post => ({
-        link: `posts/${slugify(post.frontmatter)}`,
-        title: post.frontmatter.title,
-        description: post.frontmatter.description,
-        pubDate: new Date(post.frontmatter.datetime),
-        content: sanitizeHtml(post.compiledContent(), {
+      .map(post => {
+        const content = sanitizeHtml(post.compiledContent(), {
           allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
-        }),
-      })),
+        });
+        return {
+          link: `posts/${slugify(post.frontmatter)}`,
+          title: post.frontmatter.title,
+          description: post.frontmatter.description,
+          pubDate: new Date(post.frontmatter.datetime),
+          ...(content && { content }),
+        };
+      }),
   });
