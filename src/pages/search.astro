@@ -10,7 +10,7 @@ import type { MarkdownInstance } from "astro";
 
 // Retrieve all articles
 const posts = Object.values(
-  import.meta.glob("../contents/**/*.md", { eager: true })
+  import.meta.glob("../contents/**/*.{md,mdx}", { eager: true })
 ) as MarkdownInstance<Frontmatter>[];
 
 // List of items to search in

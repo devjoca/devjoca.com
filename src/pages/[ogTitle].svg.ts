@@ -7,7 +7,7 @@ export const get: APIRoute = async ({ params }) => ({
 });
 
 const postImportResult = import.meta.glob<MarkdownInstance<Frontmatter>>(
-  "../contents/**/**/*.md",
+  "../contents/**/**/*.{md,mdx}",
   {
     eager: true,
   }

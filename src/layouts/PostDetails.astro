@@ -75,6 +75,14 @@ const datePublishedIso = Number.isFinite(publishedDate.getTime())
     <h1 class="post-title">{title}</h1>
     <Datetime datetime={datetime} size="lg" className="my-2" />
 
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose">
+      <Content />
+    </article>
+
+    <ul class="tags-container">
+      {tags.map(tag => <Tag name={tag} />)}
+    </ul>
+
     {
       showAuthorBio && (
         <AuthorBio
@@ -86,14 +94,6 @@ const datePublishedIso = Number.isFinite(publishedDate.getTime())
         />
       )
     }
-
-    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose">
-      <Content />
-    </article>
-
-    <ul class="tags-container">
-      {tags.map(tag => <Tag name={tag} />)}
-    </ul>
   </main>
   <Footer />
 </Layout>

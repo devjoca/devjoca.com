@@ -1,0 +1,216 @@
+---
+/**
+ * Chart component — wraps Chart.js with blog style defaults.
+ *
+ * Usage in .md:
+ *   import Chart from "@components/Chart.astro";
+ *
+ *   <Chart config={{ type: "line", labels: [...], datasets: [...] }} />
+ *
+ * Config shape:
+ *   {
+ *     type: "line" | "bar",
+ *     title?: string,
+ *     labels: string[],
+ *     datasets: Array<{
+ *       label: string,
+ *       data: number[],
+ *       color?: string,              // line/border color
+ *       pointColors?: string[],      // per-point dot colors
+ *       fill?: boolean,
+ *       tension?: number,
+ *     }>,
+ *     referenceLines?: Array<{ value: number, label: string }>,
+ *     annotation?: { at: number, label: string, color?: string },
+ *     yMin?: number,
+ *     yMax?: number,
+ *   }
+ */
+const { config } = Astro.props;
+const id = `chart-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div class="chart-wrapper">
+  {config.title && <p class="chart-title">{config.title}</p>}
+  <div class="chart-container">
+    <canvas id={id} data-config={JSON.stringify(config)}></canvas>
+  </div>
+</div>
+
+<script>
+  import { Chart, registerables } from "chart.js";
+  Chart.register(...registerables);
+
+  const COLORS = {
+    primary: "#b43278",
+    success: "#38a169",
+    danger: "#c53030",
+    warning: "#ed8936",
+    blue: "#3182ce",
+    grid: "rgb(230, 220, 230)",
+    tick: "rgb(140, 130, 140)",
+    gridDark: "rgb(50, 35, 68)",
+    tickDark: "rgb(160, 150, 165)",
+  };
+
+  const DEFAULT_PALETTE = [
+    COLORS.primary,
+    COLORS.success,
+    COLORS.warning,
+    COLORS.danger,
+    COLORS.blue,
+  ];
+
+  function getTheme() {
+    return document.documentElement.getAttribute("data-theme") || "light";
+  }
+
+  function buildOptions(config) {
+    const theme = getTheme();
+    const gridColor = theme === "dark" ? COLORS.gridDark : COLORS.grid;
+    const tickColor = theme === "dark" ? COLORS.tickDark : COLORS.tick;
+    const font = { family: "'IBM Plex Mono', monospace", size: 11 };
+
+    return {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          titleFont: font,
+          bodyFont: font,
+          backgroundColor: theme === "dark" ? "rgb(40, 28, 55)" : "white",
+          titleColor: theme === "dark" ? "rgb(235, 159, 194)" : COLORS.primary,
+          bodyColor:
+            theme === "dark" ? "rgb(230, 220, 235)" : "rgb(40, 30, 50)",
+          borderColor: theme === "dark" ? COLORS.gridDark : COLORS.grid,
+          borderWidth: 1,
+          padding: 10,
+          cornerRadius: 8,
+        },
+      },
+      scales: {
+        x: {
+          grid: { color: gridColor, lineWidth: 0.5 },
+          ticks: { font, color: tickColor },
+        },
+        y: {
+          grid: { color: gridColor, lineWidth: 0.5 },
+          ticks: { font, color: tickColor },
+          ...(config.yMin !== undefined ? { min: config.yMin } : {}),
+          ...(config.yMax !== undefined ? { max: config.yMax } : {}),
+        },
+      },
+    };
+  }
+
+  function buildDatasets(config) {
+    const isBar = (config.type || "line") === "bar";
+    const datasets = config.datasets.map((ds, i) => {
+      const color = ds.color || DEFAULT_PALETTE[i % DEFAULT_PALETTE.length];
+      if (isBar) {
+        return {
+          label: ds.label,
+          data: ds.data,
+          backgroundColor: ds.pointColors || color,
+          borderColor: "transparent",
+          borderWidth: 0,
+          borderRadius: 6,
+          fill: false,
+        };
+      }
+      return {
+        label: ds.label,
+        data: ds.data,
+        borderColor: color,
+        backgroundColor: ds.fill ? `${color}14` : "transparent",
+        borderWidth: 2.5,
+        pointRadius: ds.pointColors ? 6 : 5,
+        pointHoverRadius: 8,
+        pointBackgroundColor: ds.pointColors || color,
+        pointBorderColor: "white",
+        pointBorderWidth: 2,
+        fill: ds.fill ?? true,
+        tension: ds.tension ?? 0.35,
+      };
+    });
+
+    if (config.referenceLines) {
+      for (const ref of config.referenceLines) {
+        datasets.push({
+          label: ref.label,
+          data: Array(config.labels.length).fill(ref.value),
+          borderColor: COLORS.primary,
+          borderWidth: 1.5,
+          borderDash: [6, 4],
+          pointRadius: 0,
+          fill: false,
+          tension: 0,
+          backgroundColor: undefined,
+          pointBackgroundColor: undefined,
+          pointBorderColor: undefined,
+          pointBorderWidth: undefined,
+        });
+      }
+    }
+
+    return datasets;
+  }
+
+  function addAnnotation(chart, config) {
+    if (!config.annotation) return;
+    const { at, label, color = COLORS.danger } = config.annotation;
+    const meta = chart.getDatasetMeta(0);
+    const point = meta.data[at];
+    if (!point) return;
+
+    const ctx = chart.ctx;
+    const originalDraw = chart.draw.bind(chart);
+    chart.draw = function () {
+      originalDraw();
+      ctx.save();
+      ctx.fillStyle = color;
+      ctx.font = "600 11px 'IBM Plex Mono', monospace";
+      ctx.textAlign = "center";
+      ctx.fillText(label, point.x, point.y - 16);
+      ctx.restore();
+    };
+  }
+
+  document.querySelectorAll("canvas[data-config]").forEach(el => {
+    const canvas = el as HTMLCanvasElement;
+    const config = JSON.parse(canvas.dataset.config!);
+    const chart = new Chart(canvas, {
+      type: config.type || "line",
+      data: { labels: config.labels, datasets: buildDatasets(config) },
+      options: buildOptions(config),
+    });
+    addAnnotation(chart, config);
+  });
+</script>
+
+<style>
+  .chart-wrapper {
+    border: 1px solid var(--prose-border, rgb(230, 220, 230));
+    border-radius: 12px;
+    padding: 20px;
+    margin: 1.5rem 0;
+    background: var(--prose-bg, rgb(251, 248, 250));
+  }
+  .chart-title {
+    font-family: var(--font-heading, "Space Mono", monospace);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgb(var(--color-accent));
+    margin-bottom: 16px;
+    letter-spacing: 0.3px;
+  }
+  .chart-container {
+    position: relative;
+    height: 260px;
+  }
+  html[data-theme="dark"] .chart-wrapper {
+    background: rgb(40, 28, 55);
+    border-color: rgb(50, 35, 68);
+  }
+</style>

@@ -6,7 +6,7 @@ import slugify from "@utils/slugify";
 import sanitizeHtml from "sanitize-html";
 
 const postImportResult = import.meta.glob<MarkdownInstance<Frontmatter>>(
-  "../contents/**/*.md",
+  "../contents/**/*.{md,mdx}",
   {
     eager: true,
   }

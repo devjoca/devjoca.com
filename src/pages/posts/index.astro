@@ -6,7 +6,7 @@ import getPageNumbers from "@utils/getPageNumbers";
 import type { Frontmatter } from "src/types";
 
 const posts = Object.values(
-  import.meta.glob<Frontmatter>("../../contents/**/*.md", { eager: true })
+  import.meta.glob<Frontmatter>("../../contents/**/*.{md,mdx}", { eager: true })
 );
 
 const sortedPosts = getSortedPosts(posts);

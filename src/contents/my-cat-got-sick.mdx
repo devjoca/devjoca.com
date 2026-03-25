@@ -1,0 +1,226 @@
+---
+author: Joca Pereyra
+datetime: 2026-03-25T12:00:00Z
+title: "My cat got sick: from chaotic WhatsApp notes to an actual dashboard"
+slug: my-cat-got-sick-dashboard
+featured: false
+tags:
+  - post
+  - cats
+  - llms
+  - opencode
+draft: false
+ogImage: "/images/blog/rumi/rumi.jpg"
+description: My cat Rumi got sick. I ended up building her a medical dashboard with an LLM and one hour of work.
+---
+
+import Chart from "@components/Chart.astro";
+
+Rumi has been sick for about six weeks. What started as a routine concern turned into a pile of medical documents — hemograms, ultrasounds, prescriptions, urine cultures — scattered across WhatsApp. The vet group. Direct messages from the vet. Conversations between me and my girlfriend. Every time I wanted to check if her creatinine improved from last week, I'd scroll through three different chats looking for a forwarded PDF.
+
+The vet probably has a better system, but it's internal. You never see it. You just get screenshots and forwarded files.
+
+I tried Claude Cowork first. It runs in an isolated sandbox and couldn't properly read the PDFs. Might be a bias on my end — I didn't push it hard. But it felt off. I'm a developer. I already have tools on my machine to decode files, OCR, read structured data. Using something designed for a broader audience when you're sitting on top of a terminal felt like wearing shoes two sizes too big.
+
+So I switched to OpenCode with MiMo V2 Pro Free. A free model. And honestly, it handled this like Sonnet would. The interesting part is that this job didn't need some frontier-tier model. It just needed access to my filesystem and clear instructions. One hour — from the scattered WhatsApp chaos to organized PDFs, extracted data, and an HTML dashboard.
+
+One hour total. That includes the failed Claude Cowork attempt.
+
+The file naming alone changed everything. Instead of "hemograma (2).pdf" sitting in a Downloads folder, every file now has a date. You can scan the folder and see the history at a glance. I also ran exams on my other cat, Julie, as a precaution — she's fine, but now her records are organized too.
+
+```
+controles/
+├── Rumi/
+│   ├── [2025-10-17] - bloodwork.pdf
+│   ├── [2026-03-05] - biochemistry.pdf
+│   ├── [2026-03-05] - blood-count.pdf
+│   ├── [2026-03-06] - hospitalization-consent.pdf
+│   ├── [2026-03-06] - ultrasound.pdf
+│   ├── [2026-03-09] - blood-count.pdf
+│   ├── [2026-03-11] - urine-culture.pdf
+│   ├── [2026-03-16] - nephrology-notes.pdf
+│   ├── [2026-03-18] - bloodwork.pdf
+│   ├── [2026-03-18] - prescription (updated).pdf
+│   ├── [2026-03-18] - ultrasound.pdf
+│   ├── [2026-03-18] - urinalysis.pdf
+│   ├── [2026-03-20] - nephrology-consult.pdf
+│   ├── [2026-03-21] - prescription-updated.pdf
+│   ├── [2026-03-24] - tube-removal-notes.txt
+│   └── rumi_dashboard.html
+└── Julie/
+    └── [2026-03-16] - bloodwork.pdf
+```
+
+_(real file names were in Spanish — translated here for readability)_
+
+Then the dashboard. Chart.js, nothing fancy. But when you see creatinine going from 8.95 mg/dL to 1.44 in twelve days, plotted on a line with a reference threshold — that tells a story that scrolling through PDFs never could. Weight going from 3.18 kg back to 3.5. A clinical timeline you can actually follow.
+
+## Creatinine — the money chart
+
+<Chart
+  config={{
+    type: "line",
+    title: "Creatinine (mg/dL)",
+    labels: ["Oct 25", "Mar 5", "Mar 6", "Mar 9", "Mar 18"],
+    datasets: [
+      {
+        label: "Creatinine",
+        data: [1.1, 7.35, 8.95, 6.34, 1.44],
+        pointColors: ["#38a169", "#c53030", "#c53030", "#ed8936", "#38a169"],
+      },
+    ],
+    referenceLines: [{ value: 1.8, label: "ref 1.8" }],
+    annotation: { at: 2, label: "peak 8.95", color: "#c53030" },
+  }}
+/>
+
+<div style="display:flex; gap:12px; margin:1rem 0; flex-wrap:wrap;">
+
+<div style="flex:1; min-width:120px; padding:12px; border-radius:8px; border:1px solid #e6dce6; text-align:center;">
+  <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:1px; color:#999; margin-bottom:4px;">
+    Peak
+  </div>
+  <div style="font-size:1.3rem; font-weight:700; color:#c53030;">8.95</div>
+  <div style="font-size:0.7rem; color:#999;">mg/dL · Mar 6</div>
+</div>
+
+<div style="flex:1; min-width:120px; padding:12px; border-radius:8px; border:1px solid #e6dce6; text-align:center;">
+  <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:1px; color:#999; margin-bottom:4px;">
+    Recovery
+  </div>
+  <div style="font-size:1.3rem; font-weight:700; color:#38a169;">−84%</div>
+  <div style="font-size:0.7rem; color:#999;">12 days</div>
+</div>
+
+<div style="flex:1; min-width:120px; padding:12px; border-radius:8px; border:1px solid #e6dce6; text-align:center;">
+  <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:1px; color:#999; margin-bottom:4px;">
+    Current
+  </div>
+  <div style="font-size:1.3rem; font-weight:700; color:#38a169;">1.44</div>
+  <div style="font-size:0.7rem; color:#999;">mg/dL · normal ✓</div>
+</div>
+
+<div style="flex:1; min-width:120px; padding:12px; border-radius:8px; border:1px solid #e6dce6; text-align:center;">
+  <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:1px; color:#999; margin-bottom:4px;">
+    Ref
+  </div>
+  <div style="font-size:1.3rem; font-weight:700; color:#b43278;">&lt;1.8</div>
+  <div style="font-size:0.7rem; color:#999;">mg/dL</div>
+</div>
+
+</div>
+
+Her creatinine was 1.1 back in October — totally normal. Then March hit. 7.35 on the 5th. 8.95 on the 6th. That's almost 5x the upper limit. Three days into treatment it dropped to 6.34. Twelve days later: 1.44. Normal range. That curve is the whole story.
+
+## Weight — coming back
+
+<Chart
+  config={{
+    type: "line",
+    title: "Weight (kg)",
+    labels: ["Mar 16", "Mar 18", "Mar 20", "Mar 21", "Mar 24"],
+    datasets: [
+      {
+        label: "Weight",
+        data: [3.18, 3.35, 3.18, 3.2, 3.5],
+        color: "#38a169",
+        pointColors: ["#ed8936", "#38a169", "#ed8936", "#38a169", "#38a169"],
+      },
+    ],
+    referenceLines: [{ value: 3.2, label: "ref 3.2" }],
+    yMin: 3.0,
+    yMax: 3.7,
+  }}
+/>
+
+That second chart is less dramatic but maybe more meaningful. 3.18 kg at discharge. A dip. Then climbing. 3.5 on March 24th — the day the feeding tube came out. She's eating on her own.
+
+## What the LLM found
+
+The agent read 20+ PDFs — ultrasounds, hemograms, prescriptions, consents — and extracted the key values chronologically. Then it plotted them. That's when the patterns show up.
+
+**BUN tracked creatinine.** Both spiked together on March 6th (BUN 116, creatinine 8.95). Both normalized by March 18th (BUN 24.3, creatinine 1.44). Two kidney markers telling the same story: the fluid therapy worked.
+
+<Chart
+  config={{
+    type: "line",
+    title: "BUN (mg/dL) — blood urea nitrogen",
+    labels: ["Oct 25", "Mar 5", "Mar 6", "Mar 9", "Mar 18"],
+    datasets: [
+      {
+        label: "BUN",
+        data: [19, 76.02, 116.23, 98.37, 24.3],
+        pointColors: ["#38a169", "#c53030", "#c53030", "#ed8936", "#38a169"],
+      },
+    ],
+    referenceLines: [{ value: 30, label: "ref 30" }],
+    annotation: { at: 2, label: "peak 116", color: "#c53030" },
+  }}
+/>
+
+**Neutrophils stayed elevated.** Even after kidneys recovered, neutrophils were at 79% on March 18th. The infection was still fighting. The antibiotics were working but not done — which is why Clamovet got extended to 30 days.
+
+<Chart
+  config={{
+    type: "bar",
+    title: "Neutrophils % — infection & stress indicator",
+    labels: ["Oct 25", "Mar 5", "Mar 6", "Mar 9", "Mar 18"],
+    datasets: [
+      {
+        label: "Neutrophils %",
+        data: [52.6, 88, 72, 91, 79],
+        pointColors: ["#38a169", "#c53030", "#ed8936", "#c53030", "#ed8936"],
+      },
+    ],
+    referenceLines: [{ value: 60, label: "ref 60%" }],
+  }}
+/>
+
+**Hematocrit trending down.** 42.9% in October. 32.3% on March 18th. Still in the normal range (29–45%), but the direction matters. A declining hematocrit during kidney disease can signal the kidneys aren't producing enough erythropoietin. Not urgent yet — but worth watching at the next visit.
+
+<Chart
+  config={{
+    type: "line",
+    title: "Hematocrit % — anemia watch",
+    labels: ["Oct 25", "Mar 5", "Mar 6", "Mar 9", "Mar 18"],
+    datasets: [
+      {
+        label: "Hematocrit",
+        data: [42.9, 45, 36.6, 37.5, 32.3],
+        color: "#3182ce",
+        pointColors: ["#38a169", "#38a169", "#38a169", "#38a169", "#ed8936"],
+      },
+    ],
+    referenceLines: [
+      { value: 45, label: "ref max" },
+      { value: 29, label: "ref min" },
+    ],
+  }}
+/>
+
+These patterns are visible when you plot them. Hard to see by scrolling through individual PDFs.
+
+## Medicines
+
+The prescription changed as Rumi's condition evolved. The agent tracked every update across multiple documents:
+
+| Drug                         | Purpose                                 |
+| ---------------------------- | --------------------------------------- |
+| Clamovet (amox + clavulanic) | Urinary infection — extended to 30 days |
+| Renal N                      | Kidney support                          |
+| Epakitin                     | Phosphorus binder                       |
+| Proteliv                     | Liver support                           |
+| Tamsulosin 0.12 mg           | Ureteral stone expulsion                |
+| Citrate of Potassium         | Urinary alkalization                    |
+| Mirtazapina                  | Appetite stimulant                      |
+| Traumeel                     | Pain management                         |
+
+The key shift: on March 18th the focus was kidney recovery. By March 21st, the prescription added Tamsulosin and Citrate of Potassium — shifting to the actual cause (the ureteral stone). Treatment followed the data.
+
+Rumi has a ureteral obstruction from a PLUG (protein matrix plug) with secondary kidney infection. She's on antibiotics, renal supplements, and a special diet. The tube is out. She's eating on her own. That chart going down and to the right means she's getting better.
+
+Your vet won't give you a dashboard. But you can build one.
+
+![Rumi](/images/blog/rumi/rumi.jpg)
+
+She still has a long way to go — the ureteral stone, the kidney recovery, the weight. But the charts are going in the right direction. If you made it this far, send some good energy her way. She could use it.

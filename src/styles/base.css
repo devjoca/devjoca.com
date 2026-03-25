@@ -221,11 +221,6 @@
     padding: 0.5rem 0.75rem;
     white-space: normal;
   }
-  .prose thead th:first-child,
-  tbody td:first-child,
-  tfoot td:first-child {
-    padding-left: 0.5714286em;
-  }
   .prose h2#table-of-contents {
     @apply mb-2;
   }
@@ -353,4 +348,11 @@ html[data-theme="dark"] .prose th {
 
 html[data-theme="dark"] .prose code {
   color: rgb(var(--color-accent));
+}
+
+/* Override Tailwind typography first-child padding reset (outside @layer for higher priority) */
+.prose thead th:first-child,
+.prose tbody td:first-child,
+.prose tfoot td:first-child {
+  padding-inline-start: 0.625rem;
 }
