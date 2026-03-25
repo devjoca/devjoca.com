@@ -350,6 +350,10 @@ html[data-theme="dark"] .prose code {
   color: rgb(var(--color-accent));
 }
 
+html[data-theme="dark"] .prose strong {
+  color: rgb(var(--color-text-base));
+}
+
 /* Override Tailwind typography first-child padding reset (outside @layer for higher priority) */
 .prose thead th:first-child,
 .prose tbody td:first-child,
