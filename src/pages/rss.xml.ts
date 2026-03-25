@@ -21,9 +21,15 @@ export const GET = () =>
     items: posts
       .filter(({ frontmatter }) => !frontmatter.draft)
       .map(post => {
-        const content = sanitizeHtml(post.compiledContent(), {
-          allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
-        });
+        const raw =
+          typeof post.compiledContent === "function"
+            ? post.compiledContent()
+            : "";
+        const content = raw
+          ? sanitizeHtml(raw, {
+              allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+            })
+          : "";
         return {
           link: `posts/${slugify(post.frontmatter)}`,
           title: post.frontmatter.title,
