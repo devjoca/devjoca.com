@@ -13,20 +13,17 @@ const postImportResult = import.meta.glob<MarkdownInstance<Frontmatter>>(
 );
 const posts = Object.values(postImportResult);
 
-export const GET = () =>
-  rss({
-    title: SITE.title,
-    description: SITE.desc,
-    site: SITE.website,
-    items: posts
+export const GET = async () => {
+  const items = await Promise.all(
+    posts
       .filter(({ frontmatter }) => !frontmatter.draft)
-      .map(post => {
+      .map(async post => {
         const raw =
           typeof post.compiledContent === "function"
-            ? post.compiledContent()
+            ? await post.compiledContent()
             : "";
         const content = raw
-          ? sanitizeHtml(raw, {
+          ? sanitizeHtml(String(raw), {
               allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
             })
           : "";
@@ -37,5 +34,13 @@ export const GET = () =>
           pubDate: new Date(post.frontmatter.datetime),
           ...(content && { content }),
         };
-      }),
+      })
+  );
+
+  return rss({
+    title: SITE.title,
+    description: SITE.desc,
+    site: SITE.website,
+    items,
   });
+};

@@ -1,7 +1,7 @@
 ---
 author: Joca Pereyra
 datetime: 2026-03-25T12:00:00Z
-title: "My cat got sick: from chaotic WhatsApp notes to an actual dashboard"
+title: "My cat got sick, so I turned a WhatsApp mess into a dashboard"
 slug: my-cat-got-sick-dashboard
 featured: false
 tags:
@@ -11,22 +11,22 @@ tags:
   - opencode
 draft: false
 ogImage: "/images/blog/rumi/rumi.jpg"
-description: My cat Rumi got sick. I ended up building her a medical dashboard with an LLM and one hour of work.
+description: Rumi got sick, her records were scattered across chats, and I spent an hour turning the mess into a dashboard I could actually use.
 ---
 
 import Chart from "@components/Chart.astro";
 
-Rumi has been sick for about six weeks. What started as a routine concern turned into a pile of medical documents — hemograms, ultrasounds, prescriptions, urine cultures — scattered across WhatsApp. The vet group. Direct messages from the vet. Conversations between me and my girlfriend. Every time I wanted to check if her creatinine improved from last week, I'd scroll through three different chats looking for a forwarded PDF.
+Rumi has been sick for about six weeks, and at some point my life turned into cat-medical paperwork triage. Hemograms, ultrasounds, prescriptions, urine cultures. Some in the vet group chat. Some in direct messages. Some buried in conversations with my girlfriend. Every time I wanted to check whether her creatinine was better than last week, I had to go digging for some forwarded PDF.
 
-The vet probably has a better system, but it's internal. You never see it. You just get screenshots and forwarded files.
+The vet almost certainly has a proper system. I do not. I get screenshots, forwarded files, and documents called things like `hemograma (2).pdf`.
 
-I tried Claude Cowork first. It runs in an isolated sandbox and couldn't properly read the PDFs. Might be a bias on my end — I didn't push it hard. But it felt off. I'm a developer. I already have tools on my machine to decode files, OCR, read structured data. Using something designed for a broader audience when you're sitting on top of a terminal felt like wearing shoes two sizes too big.
+I tried Claude Cowork first. It runs in an isolated sandbox, and in my case it never really got comfortable with the PDFs. Maybe that's on me. I didn't spend that long trying to force it. Still, it felt like the wrong shape of tool. I'm already sitting in a terminal. I already have OCR, file utilities, and parsers on my machine. Using something more locked down for this felt cramped.
 
-So I switched to OpenCode with MiMo V2 Pro Free. A free model. And honestly, it handled this like Sonnet would. The interesting part is that this job didn't need some frontier-tier model. It just needed access to my filesystem and clear instructions. One hour — from the scattered WhatsApp chaos to organized PDFs, extracted data, and an HTML dashboard.
+So I switched to OpenCode with MiMo V2 Pro Free. Free model, totally fine. This job did not need a frontier model. It needed filesystem access and instructions that were actually specific. In about an hour, including the failed Claude detour, I had the files renamed, the lab values extracted, and a little HTML dashboard I could use.
 
-One hour total. That includes the failed Claude Cowork attempt.
+About an hour total. That includes the failed first attempt.
 
-The file naming alone changed everything. Instead of "hemograma (2).pdf" sitting in a Downloads folder, every file now has a date. You can scan the folder and see the history at a glance. I also ran exams on my other cat, Julie, as a precaution — she's fine, but now her records are organized too.
+That part alone was worth it. Once every file had a date, the folder stopped looking like a junk drawer and started looking like a timeline. I also ran bloodwork on my other cat, Julie, just to be safe. She is fine, and now her records are organized too.
 
 ```
 controles/
@@ -51,11 +51,11 @@ controles/
     └── [2026-03-16] - bloodwork.pdf
 ```
 
-_(real file names were in Spanish — translated here for readability)_
+_(the real file names were in Spanish, translated here so this is easier to read)_
 
-Then the dashboard. Chart.js, nothing fancy. Creatinine improved from 8.95 to 1.44 — and I finally got to see it in a chart. Before that it was just numbers floating in my head. Weight going from 3.18 kg back to 3.5. A clinical timeline you can actually follow.
+Then I plotted everything. Plain Chart.js. Nothing fancy, which was perfect. Creatinine dropped from 8.95 to 1.44. Weight crawled back from 3.18 kg to 3.5. Once it was on a screen, I did not have to keep the whole case in my head anymore.
 
-## Creatinine — the money chart
+## Creatinine: the chart I kept reopening
 
 <Chart
   config={{
@@ -110,9 +110,9 @@ Then the dashboard. Chart.js, nothing fancy. Creatinine improved from 8.95 to 1.
 
 </div>
 
-Her creatinine was 1.1 back in October — totally normal. Then March hit. 7.35 on the 5th. 8.95 on the 6th. That's almost 5x the upper limit. Three days into treatment it dropped to 6.34. Twelve days later: 1.44. Normal range. That curve is the whole story.
+Her creatinine was 1.1 back in October, totally normal. Then March got ugly. It was 7.35 on March 5, then 8.95 on March 6. Almost five times the upper limit. Three days into treatment it dropped to 6.34. Twelve days later it was 1.44. I kept coming back to this chart because it turned panic into something I could at least track.
 
-## Weight — coming back
+## Weight: slowly coming back
 
 <Chart
   config={{
@@ -133,18 +133,18 @@ Her creatinine was 1.1 back in October — totally normal. Then March hit. 7.35 
   }}
 />
 
-That second chart is less dramatic but maybe more meaningful. 3.18 kg at discharge. A dip. Then climbing. 3.5 on March 24th — the day the feeding tube came out. She's eating on her own.
+This one is less dramatic, but honestly it meant more to me. She left the clinic at 3.18 kg. Then she dipped a bit. Then she started climbing again. She hit 3.5 kg on March 24, the same day the feeding tube came out. That is the kind of number you stare at for a while.
 
-## What the LLM found
+## What showed up once the data was in one place
 
-The agent read 20+ PDFs — ultrasounds, hemograms, prescriptions, consents — and extracted the key values chronologically. Then it plotted them. That's when the patterns show up.
+I had the model go through 20-plus PDFs, pull out the key values, and line them up by date. Once it did that, a few things became obvious.
 
-**BUN tracked creatinine.** Both spiked together on March 6th (BUN 116, creatinine 8.95). Both normalized by March 18th (BUN 24.3, creatinine 1.44). Two kidney markers telling the same story: the fluid therapy worked.
+**BUN moved with creatinine.** They both spiked on March 6 (BUN 116, creatinine 8.95). They were both back in range by March 18 (BUN 24.3, creatinine 1.44). That was reassuring in a strange way. Two kidney markers, same story.
 
 <Chart
   config={{
     type: "line",
-    title: "BUN (mg/dL) — blood urea nitrogen",
+    title: "BUN (mg/dL): blood urea nitrogen",
     labels: ["Oct 25", "Mar 5", "Mar 6", "Mar 9", "Mar 18"],
     datasets: [
       {
@@ -158,12 +158,12 @@ The agent read 20+ PDFs — ultrasounds, hemograms, prescriptions, consents — 
   }}
 />
 
-**Neutrophils stayed elevated.** Even after kidneys recovered, neutrophils were at 79% on March 18th. The infection was still fighting. The antibiotics were working but not done — which is why Clamovet got extended to 30 days.
+**Neutrophils stayed high.** Even after the kidney numbers recovered, neutrophils were still at 79% on March 18. So it was not a clean "everything is fine now" moment. The antibiotics were helping, but the infection clearly was not done, which helps explain why Clamovet got extended to 30 days.
 
 <Chart
   config={{
     type: "bar",
-    title: "Neutrophils % — infection & stress indicator",
+    title: "Neutrophils %: infection and stress indicator",
     labels: ["Oct 25", "Mar 5", "Mar 6", "Mar 9", "Mar 18"],
     datasets: [
       {
@@ -176,12 +176,12 @@ The agent read 20+ PDFs — ultrasounds, hemograms, prescriptions, consents — 
   }}
 />
 
-**Hematocrit trending down.** 42.9% in October. 32.3% on March 18th. Still in the normal range (29–45%), but the direction matters. A declining hematocrit during kidney disease can signal the kidneys aren't producing enough erythropoietin. Not urgent yet — but worth watching at the next visit.
+**Hematocrit kept sliding.** It was 42.9% in October and 32.3% on March 18. Still within the normal range (29-45%), but heading the wrong way. During kidney disease that can mean the kidneys are not producing enough erythropoietin. Not an emergency, but definitely something I want watched at the next visit.
 
 <Chart
   config={{
     type: "line",
-    title: "Hematocrit % — anemia watch",
+    title: "Hematocrit %: anemia watch",
     labels: ["Oct 25", "Mar 5", "Mar 6", "Mar 9", "Mar 18"],
     datasets: [
       {
@@ -198,15 +198,15 @@ The agent read 20+ PDFs — ultrasounds, hemograms, prescriptions, consents — 
   }}
 />
 
-These patterns are visible when you plot them. Hard to see by scrolling through individual PDFs.
+This is the kind of thing that is easy to miss when you are opening PDFs one by one and trying to remember what changed.
 
 ## Medicines
 
-The prescription changed as Rumi's condition evolved. The agent tracked every update across multiple documents:
+The prescription changed as Rumi's case changed, so I had the model pull every update into one place:
 
 | Drug                         | Purpose                                 |
 | ---------------------------- | --------------------------------------- |
-| Clamovet (amox + clavulanic) | Urinary infection — extended to 30 days |
+| Clamovet (amox + clavulanic) | Urinary infection, extended to 30 days  |
 | Renal N                      | Kidney support                          |
 | Epakitin                     | Phosphorus binder                       |
 | Proteliv                     | Liver support                           |
@@ -215,12 +215,12 @@ The prescription changed as Rumi's condition evolved. The agent tracked every up
 | Mirtazapina                  | Appetite stimulant                      |
 | Traumeel                     | Pain management                         |
 
-The key shift: on March 18th the focus was kidney recovery. By March 21st, the prescription added Tamsulosin and Citrate of Potassium — shifting to the actual cause (the ureteral stone). Treatment followed the data.
+What changed between March 18 and March 21 is pretty clear. Early on the focus was stabilizing her kidneys. Later the prescription added Tamsulosin and Citrate of Potassium, which is much more about dealing with the ureteral stone itself. Same cat, different phase of the problem.
 
-Rumi has a ureteral obstruction from a PLUG (protein matrix plug) with secondary kidney infection. She's on antibiotics, renal supplements, and a special diet. The tube is out. She's eating on her own. That chart going down and to the right means she's getting better.
+Rumi has a ureteral obstruction from a PLUG (protein matrix plug), plus a kidney infection on top of that. She is on antibiotics, renal supplements, and a special diet. The tube is out. She is eating on her own again. I am not pretending a chart fixes any of this, but seeing the numbers move in the right direction has helped a lot.
 
-Your vet won't give you a dashboard. But you can build one.
+Your vet is probably not going to hand you a dashboard. If you know your way around a terminal, you can make your own.
 
 ![Rumi](/images/blog/rumi/rumi.jpg)
 
-She still has a long way to go — the ureteral stone, the kidney recovery, the weight. But the charts are going in the right direction. If you made it this far, send some good energy her way. She could use it.
+She still has a way to go. The stone is still there. Her kidneys need watching. Her weight does too. But the trend is finally not terrifying. If you made it this far, send a little good luck her way.

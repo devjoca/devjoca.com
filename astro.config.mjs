@@ -1,6 +1,5 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
-import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
@@ -31,9 +30,13 @@ export default defineConfig({
         tertiaryColor: "#f5fefb",
       },
     }),
-    react(),
     mdx(),
-    sitemap(),
+    sitemap({
+      filter: page =>
+        !page.includes("/search") &&
+        !page.includes("/tags/") &&
+        !/\/posts\/\d+\/$/.test(page),
+    }),
     compress(), // Compression must be last
   ],
   build: {
@@ -41,15 +44,6 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            react: ["react", "react-dom"], // Split React into separate chunk
-          },
-        },
-      },
-    },
   },
   markdown: {
     remarkPlugins: [
@@ -75,6 +69,5 @@ export default defineConfig({
       theme: "one-dark-pro",
       wrap: true,
     },
-    extendDefaultPlugins: true,
   },
 });

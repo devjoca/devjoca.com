@@ -10,7 +10,7 @@ tags:
   - RAG
 draft: false
 ogImage: ""
-description: Explore advanced retrieval strategies that enhance the integration of vector databases with large language models (LLMs). This detailed guide delves into the challenges and solutions associated with document retrieval, including techniques like similarity search, contextual compression, query rewriting, reranking, and parent document retrieval. Learn how to optimize document processing for better accuracy and relevance in AI-driven systems. Discover practical solutions for handling large document chunks, improving context relevance, and ensuring that only the most pertinent documents are fed into LLMs. Perfect for developers and technologists seeking to refine their retrieval systems using the latest advancements in AI and database management.
+description: A practical guide to retrieval strategies for LLMs — similarity search, contextual compression, query rewriting, reranking, and parent document retrieval.
 ---
 
 In this article, we explore effective strategies for integrating vector databases with large language models (LLMs). Learn about the latest techniques in similarity search, contextual compression, and more, to enhance how your systems process and retrieve documents for relevant answers. This small guide is ideal for developers and technologists looking to update your AI applications.

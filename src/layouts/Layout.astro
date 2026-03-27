@@ -9,6 +9,7 @@ export interface Props {
   author?: string;
   description?: string;
   ogImage?: string;
+  ogType?: string;
 }
 
 const {
@@ -16,6 +17,7 @@ const {
   author = SITE.author,
   description = SITE.desc,
   ogImage = SITE.ogImage,
+  ogType = "website",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -44,6 +46,7 @@ const fallbackImageURL = new URL(SITE.ogImage, Astro.url.origin).href;
     <meta name="author" content={author} />
 
     <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />

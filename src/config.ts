@@ -3,7 +3,7 @@ import type { SocialObjects } from "./types";
 export const SITE = {
   website: "https://devjoca.com",
   author: "Joca Pereyra",
-  desc: "Welcome to Joca's tech blog! Join me, a seasoned backend developer, as I delve into the latest advancements in technology and AI/ML. I bring expertise in PHP, Python, Node.js, and TypeScript, and share my knowledge and insights through tutorials and tips. Stay ahead of the game and join me on this journey to continually improve and explore the world of software engineering.",
+  desc: "Backend developer writing about AI agents, LLMs, retrieval systems, and building practical tools with Python and TypeScript.",
   title: "devjoca",
   ogImage: "devjoca-og.png",
   lightAndDarkMode: true,
