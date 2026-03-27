@@ -1,12 +1,14 @@
 ---
+import { Image } from "astro:assets";
 import { SITE, SOCIALS } from "src/config";
+import defaultAvatar from "src/assets/joca.png";
 
 export interface Props {
   name?: string;
   title?: string;
   years?: string;
   byline?: string;
-  image?: string;
+  image?: ImageMetadata;
 }
 
 const {
@@ -14,7 +16,7 @@ const {
   title = "Senior Developer",
   years = "8 years of experience",
   byline = SITE.desc,
-  image = "/joca.png",
+  image = defaultAvatar,
 } = Astro.props;
 
 const github = SOCIALS.find(s => s.name === "Github");
@@ -32,20 +34,32 @@ const personSchema = {
 };
 ---
 
-<aside class="author-bio">
-  <img src={image} alt={name} class="author-avatar" />
-  <div class="author-info">
-    <h3 class="author-name">{name}</h3>
-    <p class="author-credentials">
+<aside
+  class="flex gap-4 p-6 bg-skin-card rounded-lg my-8 border border-skin-line"
+>
+  <Image
+    src={image}
+    alt={name ?? ""}
+    width={80}
+    height={80}
+    class="w-20 h-20 shrink-0 rounded-full object-cover"
+  />
+  <div class="flex-1">
+    <h3 class="text-lg font-semibold text-skin-base m-0 mb-1">{name}</h3>
+    <p class="text-sm text-skin-accent m-0 mb-2">
       {title}
-      {years && <span class="credentials-separator">•</span>}
+      {years && <span class="mx-1">•</span>}
       {years && <span>{years}</span>}
     </p>
-    <p class="author-byline">{byline}</p>
-    <div class="author-links">
+    <p class="text-sm text-skin-base opacity-80 m-0 mb-3">{byline}</p>
+    <div class="flex gap-4">
       {
         github && (
-          <a href={github.href} title={github.linkTitle} class="author-link">
+          <a
+            href={github.href}
+            title={github.linkTitle}
+            class="text-sm text-skin-accent no-underline font-medium transition-opacity duration-200 hover:opacity-70"
+          >
             GitHub
           </a>
         )
@@ -55,7 +69,7 @@ const personSchema = {
           <a
             href={linkedin.href}
             title={linkedin.linkTitle}
-            class="author-link"
+            class="text-sm text-skin-accent no-underline font-medium transition-opacity duration-200 hover:opacity-70"
           >
             LinkedIn
           </a>
@@ -66,69 +80,3 @@ const personSchema = {
 </aside>
 
 <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
-
-<style>
-  @reference "../styles/base.css";
-  .author-bio {
-    display: flex;
-    gap: 1rem;
-    padding: 1.5rem;
-    background-color: rgb(var(--color-card));
-    border-radius: 0.5rem;
-    margin: 2rem 0;
-    border: 1px solid rgb(var(--color-border));
-  }
-
-  .author-avatar {
-    width: 80px;
-    height: 80px;
-    min-width: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-
-  .author-info {
-    flex: 1;
-  }
-
-  .author-name {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: rgb(var(--color-text-base));
-    margin: 0 0 0.25rem 0;
-  }
-
-  .author-credentials {
-    font-size: 0.875rem;
-    color: rgb(var(--color-accent));
-    margin: 0 0 0.5rem 0;
-  }
-
-  .credentials-separator {
-    margin: 0 0.25rem;
-  }
-
-  .author-byline {
-    font-size: 0.875rem;
-    color: rgb(var(--color-text-base));
-    opacity: 0.8;
-    margin: 0 0 0.75rem 0;
-  }
-
-  .author-links {
-    display: flex;
-    gap: 1rem;
-  }
-
-  .author-link {
-    font-size: 0.875rem;
-    color: rgb(var(--color-accent));
-    text-decoration: none;
-    font-weight: 500;
-    transition: opacity 0.2s;
-  }
-
-  .author-link:hover {
-    opacity: 0.7;
-  }
-</style>

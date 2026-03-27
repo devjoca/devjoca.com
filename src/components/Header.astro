@@ -104,15 +104,7 @@ const { activeNav } = Astro.props;
     @apply relative w-full p-4 sm:py-8 flex justify-between items-start sm:items-center;
   }
   .logo {
-    @apply absolute sm:static font-semibold text-xl sm:text-2xl py-1;
-    font-family: var(--font-pixel);
-    font-size: 0.9rem;
-    letter-spacing: -0.5px;
-  }
-  @media (min-width: 640px) {
-    .logo {
-      font-size: 1.1rem;
-    }
+    @apply absolute sm:static font-semibold py-1 font-pixel text-[0.9rem] sm:text-[1.1rem] tracking-[-0.5px];
   }
   .hamburger-menu {
     @apply self-end p-2 sm:hidden;

@@ -190,27 +190,17 @@ const id = `chart-${Math.random().toString(36).slice(2, 9)}`;
 </script>
 
 <style>
+  @reference "../styles/base.css";
   .chart-wrapper {
-    border: 1px solid var(--prose-border, rgb(230, 220, 230));
-    border-radius: 12px;
-    padding: 20px;
-    margin: 1.5rem 0;
-    background: var(--prose-bg, rgb(251, 248, 250));
-  }
-  .chart-title {
-    font-family: var(--font-heading, "Space Mono", monospace);
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: rgb(var(--color-accent));
-    margin-bottom: 16px;
-    letter-spacing: 0.3px;
-  }
-  .chart-container {
-    position: relative;
-    height: 260px;
+    @apply border border-skin-line rounded-xl p-5 my-6 bg-skin-fill;
   }
   html[data-theme="dark"] .chart-wrapper {
-    background: rgb(40, 28, 55);
-    border-color: rgb(50, 35, 68);
+    @apply bg-skin-card;
+  }
+  .chart-title {
+    @apply font-heading text-[0.85rem] font-semibold text-skin-accent mb-4 tracking-[0.3px];
+  }
+  .chart-container {
+    @apply relative h-[260px];
   }
 </style>
