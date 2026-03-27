@@ -69,42 +69,7 @@ const fallbackImageURL = new URL(SITE.ogImage, Astro.url.origin).href;
         : socialImageURL}
     />
 
-    <!-- Local Fonts -->
-    <link
-      rel="preload"
-      href="/fonts/ibm-plex-mono-regular.ttf"
-      as="font"
-      type="font/ttf"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/ibm-plex-mono-medium.ttf"
-      as="font"
-      type="font/ttf"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/ibm-plex-mono-semibold.ttf"
-      as="font"
-      type="font/ttf"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/ibm-plex-mono-bold.ttf"
-      as="font"
-      type="font/ttf"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/ibm-plex-mono-italic.ttf"
-      as="font"
-      type="font/ttf"
-      crossorigin
-    />
+    <!-- Fonts loaded via @font-face in CSS with font-display: swap -->
 
     {
       // If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,

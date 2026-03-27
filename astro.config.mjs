@@ -20,6 +20,7 @@ export default defineConfig({
   integrations: [
     mermaid({
       autoTheme: true,
+      enableLog: false,
       theme: "neutral",
       themeVariables: {
         primaryColor: "#006cac",
