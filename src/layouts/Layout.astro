@@ -69,7 +69,14 @@ const fallbackImageURL = new URL(SITE.ogImage, Astro.url.origin).href;
         : socialImageURL}
     />
 
-    <!-- Fonts loaded via @font-face in CSS with font-display: swap -->
+    <!-- Preload critical font -->
+    <link
+      rel="preload"
+      href="/fonts/ibm-plex-mono-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     {
       // If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,
@@ -85,13 +92,48 @@ const fallbackImageURL = new URL(SITE.ogImage, Astro.url.origin).href;
 
     <slot name="head" />
 
-    <script is:inline src="/toggle-theme.js"></script>
-
-    <!-- Google Analytics -->
-    <script
-      is:inline
-      src="https://www.googletagmanager.com/gtag/js?id=G-J8M611TWG2"></script>
     <script is:inline>
+      const primaryColorScheme = "";
+      const currentTheme = localStorage.getItem("theme");
+      function getPreferTheme() {
+        if (currentTheme) return currentTheme;
+        if (primaryColorScheme) return primaryColorScheme;
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+      }
+      let themeValue = getPreferTheme();
+      function setPreference() {
+        localStorage.setItem("theme", themeValue);
+        reflectPreference();
+      }
+      function reflectPreference() {
+        document.firstElementChild.setAttribute("data-theme", themeValue);
+        document
+          .querySelector("#theme-btn")
+          ?.setAttribute("aria-label", themeValue);
+      }
+      reflectPreference();
+      window.onload = () => {
+        reflectPreference();
+        document.querySelector("#theme-btn")?.addEventListener("click", () => {
+          themeValue = themeValue === "light" ? "dark" : "light";
+          setPreference();
+        });
+      };
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", ({ matches: isDark }) => {
+          themeValue = isDark ? "dark" : "light";
+          setPreference();
+        });
+    </script>
+
+    <!-- Google Analytics (offloaded to web worker via Partytown) -->
+    <script
+      type="text/partytown"
+      src="https://www.googletagmanager.com/gtag/js?id=G-J8M611TWG2"></script>
+    <script type="text/partytown">
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);

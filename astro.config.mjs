@@ -5,6 +5,7 @@ import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
 import { visit } from "unist-util-visit";
 import sitemap from "@astrojs/sitemap";
+import partytown from "@astrojs/partytown";
 import compress from "@playform/compress";
 import mermaid from "astro-mermaid";
 
@@ -38,10 +39,15 @@ export default defineConfig({
         !page.includes("/tags/") &&
         !/\/posts\/\d+\/$/.test(page),
     }),
+    partytown({
+      config: {
+        forward: ["dataLayer.push"],
+      },
+    }),
     compress(), // Compression must be last
   ],
   build: {
-    inlineStylesheets: "auto", // Inline small CSS
+    inlineStylesheets: "always", // Inline all CSS to eliminate render-blocking requests
   },
   vite: {
     plugins: [tailwindcss()],
