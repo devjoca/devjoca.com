@@ -21,14 +21,14 @@ Built with [Astro](https://astro.build/) on top of [AstroPaper](https://github.c
 
 ## 🧞 Commands
 
-| Command              | Action                                      |
-| :------------------- | :------------------------------------------ |
-| `npm install`        | Install dependencies                        |
-| `npm run dev`        | Start local dev server                      |
-| `npm run build`      | Build production site to `./dist/`          |
-| `npm run preview`    | Preview build locally                       |
-| `npm run deploy`     | Build and deploy to Cloudflare Pages        |
-| `npm run format`     | Format code with Prettier                   |
+| Command            | Action                               |
+| :----------------- | :----------------------------------- |
+| `pnpm install`     | Install dependencies                 |
+| `pnpm dev`         | Start local dev server               |
+| `pnpm build`       | Build production site to `./dist/`   |
+| `pnpm preview`     | Preview build locally                |
+| `pnpm deploy`      | Build and deploy to Cloudflare Pages |
+| `pnpm format`      | Format code with Prettier            |
 
 ## 📜 License
 
