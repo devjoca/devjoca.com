@@ -1,9 +1,11 @@
 ---
 import { SITE } from "src/config";
+import { Image } from "astro:assets";
 import Breadcrumbs from "@components/Breadcrumbs.astro";
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
 import Layout from "./Layout.astro";
+import profilePhoto from "src/assets/joca.png";
 
 export interface Props {
   frontmatter: {
@@ -21,8 +23,39 @@ const { frontmatter } = Astro.props;
   <main id="main-content">
     <section id="about" class="mb-28 prose max-w-3xl prose-img:border-0">
       <h1 class="text-2xl sm:text-3xl tracking-wider">{frontmatter.title}</h1>
+      <Image
+        src={profilePhoto}
+        alt="Portrait of Joca"
+        width={212}
+        height={212}
+        class="about-portrait"
+      />
       <slot />
     </section>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  #about :global(.about-portrait) {
+    float: right;
+    width: 11.5rem;
+    height: 11.5rem;
+    object-fit: cover;
+    object-position: center 38%;
+    margin: 0.25rem 0 1.25rem 2rem;
+    border: 1px solid rgb(var(--color-border));
+    border-radius: 0.35rem;
+  }
+
+  @media (max-width: 639px) {
+    #about :global(.about-portrait) {
+      float: none;
+      display: block;
+      width: min(62%, 15rem);
+      height: auto;
+      aspect-ratio: 1;
+      margin: 0 auto 1.5rem;
+    }
+  }
+</style>
