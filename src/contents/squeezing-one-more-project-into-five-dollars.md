@@ -8,7 +8,7 @@ tags:
   - post
   - go
   - side-projects
-draft: true
+draft: false
 ogImage: "/images/blog/cotizalupa/go-gopher-hosting-box.png"
 description: Why I moved CotizaLupa's backend to Go before launch, mostly to make room on my $5 Railway plan.
 ---
