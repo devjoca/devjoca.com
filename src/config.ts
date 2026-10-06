@@ -7,7 +7,7 @@ export const SITE = {
   title: "devjoca",
   ogImage: "devjoca-og.png",
   lightAndDarkMode: true,
-  postPerPage: 3,
+  postPerPage: 10,
 };
 
 export const LOGO_IMAGE = {
