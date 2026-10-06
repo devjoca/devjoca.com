@@ -14,7 +14,7 @@ const posts = Object.values(
 );
 
 const sortedPosts = getSortedPosts(posts);
-const latestPost = sortedPosts[0];
+const latestPosts = sortedPosts.slice(0, 10);
 
 const projects = [
   {
@@ -183,17 +183,19 @@ const projects = [
       </div>
     </section>
 
-    <!-- ===== Latest Post ===== -->
+    <!-- ===== Latest Posts ===== -->
     {
-      latestPost && (
-        <section id="latest-post">
-          <h2>Latest Post</h2>
+      latestPosts.length > 0 && (
+        <section id="latest-posts">
+          <h2>Latest Posts</h2>
           <ul>
-            <Card
-              href={`/posts/${slugify(latestPost.frontmatter)}`}
-              post={latestPost.frontmatter}
-              secHeading={false}
-            />
+            {latestPosts.map(({ frontmatter }) => (
+              <Card
+                href={`/posts/${slugify(frontmatter)}`}
+                post={frontmatter}
+                secHeading={false}
+              />
+            ))}
           </ul>
           <div class="all-posts-btn-wrapper">
             <LinkButton href="/posts">
@@ -395,11 +397,11 @@ const projects = [
     }
   }
 
-  /* ===== Latest Post Section ===== */
-  #latest-post {
+  /* ===== Latest Posts Section ===== */
+  #latest-posts {
     @apply pt-10 pb-6 max-w-3xl mx-auto px-4;
   }
-  #latest-post h2 {
+  #latest-posts h2 {
     @apply font-semibold tracking-wide;
     font-family: var(--font-heading);
     font-size: 1.75rem;
