@@ -12,7 +12,7 @@ tags:
   - AI-Agents
 draft: false
 ogImage: "/images/blog/raspberry-pi/pikachu-pi-workbench.png"
-description: My Pi only runs Home Assistant, so I turned it into an SSH-only server and let agents do the work. Things I used to put off for weeks took one day.
+description: My Pi only runs Home Assistant, so I turned it into an SSH-only server and let agents handle the boring parts. Things I used to put off for months took one day.
 ---
 
 ![Pikachu in safety goggles tweaking a Raspberry Pi while two small robot agents run SSH and inspect a Bluetooth bulb, with a Home Assistant dashboard in the background](/images/blog/raspberry-pi/pikachu-pi-workbench.png)
@@ -21,7 +21,7 @@ My Raspberry Pi 4 has one job. It runs Home Assistant in Docker. It still booted
 
 I always managed it the slow way. Plug in a monitor, click through menus, open a terminal, google a command, paste it, hope. Updating Home Assistant meant digging up the `docker run` flags I used the first time. Usually I just didn't do it.
 
-This time I just enabled SSH on the Pi. From then on, the agent on my Mac could connect and do the work itself, and I stopped copying commands back and forth.
+This time I just enabled SSH on the Pi. From then on, the agent on my Mac could connect and run the commands itself. I decided what to do, and I stopped copying commands back and forth.
 
 ## The cleanup
 
@@ -84,7 +84,9 @@ The API key was the slow part. I requested it in the Govee app and waited for it
 
 Now there's a TV backlight switch in the Living room controls, and Buenas noches turns it off with everything else. Thanks, Codex.
 
-Making the backlight follow the TV automatically is still pending. HA's LG integration needs me to accept a pairing prompt on the TV, and the first attempt timed out before I saw it.
+Then we made the backlight follow the TV. HA's LG integration needed me to accept a pairing prompt on the TV. The first attempts timed out because the Apple TV screensaver was on and I wasn't looking, lol. So Codex waited until I said "ready" with a menu on screen, sent the request, and I accepted it.
+
+Now HA watches the TV's power. TV on, backlight on. TV off, backlight off a few seconds later. Menus, the screensaver, and paused movies don't count as off, so it stays on. Codex tested both directions before calling it done.
 
 ## What changed
 
