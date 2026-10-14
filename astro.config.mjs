@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import { unified } from "@astrojs/markdown-remark";
 import tailwindcss from "@tailwindcss/vite";
 import mdx from "@astrojs/mdx";
 import remarkToc from "remark-toc";
@@ -53,25 +54,27 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   markdown: {
-    remarkPlugins: [
-      remarkToc,
-      [
-        remarkCollapse,
-        {
-          test: "Table of contents",
+    processor: unified({
+      remarkPlugins: [
+        remarkToc,
+        [
+          remarkCollapse,
+          {
+            test: "Table of contents",
+          },
+        ],
+        function remarkImageOptimization() {
+          return tree => {
+            visit(tree, "image", node => {
+              // Add loading="lazy" to image nodes
+              if (!node.data) node.data = {};
+              if (!node.data.hProperties) node.data.hProperties = {};
+              node.data.hProperties.loading = "lazy";
+            });
+          };
         },
       ],
-      function remarkImageOptimization() {
-        return tree => {
-          visit(tree, "image", node => {
-            // Add loading="lazy" to image nodes
-            if (!node.data) node.data = {};
-            if (!node.data.hProperties) node.data.hProperties = {};
-            node.data.hProperties.loading = "lazy";
-          });
-        };
-      },
-    ],
+    }),
     shikiConfig: {
       theme: "one-dark-pro",
       wrap: true,

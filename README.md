@@ -15,20 +15,23 @@ Built with [Astro](https://astro.build/) on top of [AstroPaper](https://github.c
 
 - [Astro](https://astro.build/) + [React](https://reactjs.org/)
 - [TailwindCSS](https://tailwindcss.com/)
+- [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) and [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html) for linting and formatting
 - [Fuse.js](https://fusejs.io/) for search
 - [Mermaid](https://mermaid.js.org/) for diagrams
 - Deployed on [Cloudflare Pages](https://pages.cloudflare.com/)
 
 ## 🧞 Commands
 
-| Command            | Action                               |
-| :----------------- | :----------------------------------- |
-| `pnpm install`     | Install dependencies                 |
-| `pnpm dev`         | Start local dev server               |
-| `pnpm build`       | Build production site to `./dist/`   |
-| `pnpm preview`     | Preview build locally                |
-| `pnpm deploy`      | Build and deploy to Cloudflare Pages |
-| `pnpm format`      | Format code with Prettier            |
+| Command             | Action                               |
+| :------------------ | :----------------------------------- |
+| `pnpm install`      | Install dependencies                 |
+| `pnpm dev`          | Start local dev server               |
+| `pnpm build`        | Build production site to `./dist/`   |
+| `pnpm preview`      | Preview build locally                |
+| `pnpm deploy`       | Build and deploy to Cloudflare Pages |
+| `pnpm lint`         | Lint code with Oxlint                |
+| `pnpm format`       | Format code with Oxfmt               |
+| `pnpm format:check` | Check formatting with Oxfmt          |
 
 ## 📜 License
 
