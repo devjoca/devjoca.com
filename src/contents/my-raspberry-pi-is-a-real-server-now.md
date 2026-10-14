@@ -88,6 +88,8 @@ Making the backlight follow the TV automatically is still pending. HA's LG integ
 
 ## What changed
 
-The work itself isn't new. People have been trimming Pis and tuning Home Assistant for years. What changed is how long it takes. Debloating, a full OS migration, a Bluetooth bug, Apple Home, a new dashboard, and the Govee backlight all happened in one day. Before, each one was a weekend project I kept postponing.
+I was driving the whole time. I decided what to clean, when to reflash, which theme to try, and how our lights should work. The agents took the boring parts, the stuff I had been avoiding for months. Reading logs, hunting for `docker run` flags, clicking through menus.
 
-The agent didn't skip steps to go faster either. It looked first, ran dry runs, backed things up, and told me when something was a bad idea. I mostly answered questions and plugged in cables.
+And I could run them in parallel. One agent was digging into the Bluetooth bulb while I kept going on something else. When one got stuck, I started a fresh one and gave it only the problem.
+
+Debloating, a full OS migration, a Bluetooth bug, Apple Home, a new dashboard, and the Govee backlight all happened in one day. Every small win felt like a little dopamine hit, and there were a lot of them. It's awesome that we can work like this now :)
